@@ -91,6 +91,10 @@ then
 	# on wsl only
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 	alias ls='ls --color=auto'
+	alias cdwin='cd /mnt/c/Users/Marius'
+	setopt no_beep
+	setopt NO_LIST_BEEP
+	set bell-style none
 else         
 	# on linux only
 fi
