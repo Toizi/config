@@ -10,7 +10,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'ayu-theme/ayu-vim'
 Plugin 'mhartington/oceanic-next'
 Plugin 'NewProggie/NewProggie-Color-Scheme'
