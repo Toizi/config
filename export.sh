@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 cp .vimrc ~
 mkdir -p ~/.config/nvim/
 cp .vimrc ~/.config/nvim/init.vim
@@ -8,3 +9,9 @@ cp .zshrc ~
 cp .tmux.conf ~
 mkdir -p ~/.config/terminator
 cp terminator/* ~/.config/terminator/
+mkdir -p ~/.config/Code/User/
+cp Code/User/* ~/.config/Code/User/
+
+echo "installing vscode extensions"
+./install_extensions.py
+

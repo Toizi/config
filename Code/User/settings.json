@@ -1,0 +1,77 @@
+// Place your settings in this file to overwrite the default settings
+{
+    //"http.proxy": "http://165.225.72.41:80",
+    //"http.proxyStrictSSL": false,
+    "keyboard.dispatch": "keyCode",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "Source Code Pro for Powerline, Droid Sans Mono, Consolas, 'Courier New', monospace",
+    "editor.autoClosingBrackets": "beforeWhitespace",
+    "editor.wordWrap": "on",
+    "editor.rulers": [
+        80
+    ],
+    "editor.wordWrapColumn": 80,
+    "editor.wrappingIndent": "indent",
+    "editor.minimap.enabled": false,
+    "python.pythonPath": "python",
+    "python.linting.enabled": false,
+    "C_Cpp.intelliSenseEngine": "Default",
+    // "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
+    "workbench.startupEditor": "none",
+    "macros": {
+        "saveExitInsertMode": [
+            "workbench.action.files.save",
+            "extension.vim_escape"
+        ]
+    },
+    "vim.hlsearch": true,
+    "vim.handleKeys": {
+        "<C-b>": false,
+        "<C-k>": false
+    },
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["<C-u>"],
+            "after": ["2", "0", "k"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["2", "0", "j"]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["<C-u>"],
+            "after": ["2", "0", "k"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["2", "0", "j"]
+        }
+    ],
+    "vim.enableNeovim": true,
+    "window.zoomLevel": 0,
+    "sync.gist": "2e68bdc2d1e5565036723662ebbcfc85",
+    "sync.token": "51135d90e13b73cc2e10e7d474ef59d97a040de8",
+    "sync.lastUpload": "",
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.lastDownload": "2018-03-04T09:43:43.611Z",
+    "sync.forceDownload": false,
+    "sync.anonymousGist": false,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "sync.quietSync": false,
+    "sync.askGistName": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "python.jediEnabled": false,
+    "vim.neovimPath": "/usr/bin/nvim",
+    "latex-workshop.view.pdf.viewer": "external",
+    "spellright.language": [
+        "en_US"
+    ],
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "cmake.configureOnOpen": false
+}
