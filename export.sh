@@ -1,6 +1,10 @@
 cp .vimrc ~
+mkdir -p ~/.config/nvim/
+cp .vimrc ~/.config/nvim/init.vim
 cp .radare2rc ~
 cp .Xmodmap ~
 cp .dircolors ~
 cp .zshrc ~
+cp .tmux.conf ~
+mkdir -p ~/.config/terminator
 cp terminator/* ~/.config/terminator/

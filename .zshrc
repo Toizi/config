@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/marius/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -83,9 +83,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias cdshr="cd /media/sf_readwrite"
 alias vim="nvim"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+
 grep -q "Microsoft" /proc/sys/kernel/osrelease
 ON_WSL=$?
 if [ $ON_WSL -eq 0 ]
