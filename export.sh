@@ -7,6 +7,7 @@ cp .Xmodmap ~
 cp .dircolors ~
 cp .zshrc ~
 cp .tmux.conf ~
+cp -r .my_scripts ~/
 mkdir -p ~/.config/terminator
 cp terminator/* ~/.config/terminator/
 mkdir -p ~/.config/Code/User/

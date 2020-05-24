@@ -78,6 +78,12 @@ source $ZSH/oh-my-zsh.sh
 # add pip packages that are installed with --user to path
 export PATH=$PATH:~/.local/bin
 
+# add utility script path
+export PATH=$PATH:~/.my_scripts
+
+# create GHIDRA_PATH variable used in .my_scripts
+export GHIDRA_PATH=~/dev/ghidra_9.1.2_PUBLIC/
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.

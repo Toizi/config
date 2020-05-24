@@ -5,6 +5,7 @@ cp ~/.dircolors .
 cp ~/.zshrc .
 cp ~/.tmux.conf .
 cp -r ~/.config/terminator .
+cp -r ~/.my_scripts .
 cp ~/.config/Code/User/keybindings.json ~/.config/Code/User/settings.json ./Code/User/
 code --list-extensions > vscode_extensions.txt
 

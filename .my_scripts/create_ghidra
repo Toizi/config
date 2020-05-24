@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+import os
+import argparse
+import subprocess
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Create ghidra project')
+
+    parser.add_argument('project_directory',
+        help='directory where the project should be created')
+    
+    parser.add_argument('files',
+        nargs='+',
+        help='files to import in the project')
+
+    parser.add_argument('--project-name',
+        help='name of the ghidra project (default: rev)',
+        default='rev',
+        type=str)
+
+    parser.add_argument('--analyze',
+        help='whether the files should be analyzed',
+        action='store_true',
+        dest='auto_analyze')
+    
+    parser.add_argument('--print-only',
+        help='only print the commands to create the project but do not execute them',
+        action='store_true')
+    
+    args = parser.parse_args(os.sys.argv[1:])
+
+    # convert all paths to absolute ones
+    args.project_directory = os.path.abspath(args.project_directory)
+    files = []
+    for file in args.files:
+        files.append(os.path.abspath(file))
+    args.files = files
+
+
+    return args
+
+
+def main():
+    ghidra_dir = os.environ.get('GHIDRA_PATH')
+    if ghidra_dir is None or not os.path.exists(ghidra_dir):
+        print(f"GHIDRA_PATH does not exist or is empty: {ghidra_dir}")
+        exit(1)
+    
+    ghidra_headless = os.path.join(ghidra_dir, 'support/analyzeHeadless')
+    ghidra_run = os.path.join(ghidra_dir, 'ghidraRun')
+
+    if not os.path.exists(ghidra_headless):
+        print(f'[-] path to analyzeHeadless does not exist:\n  {ghidra_headless}')
+        exit(1)
+
+    if not os.path.exists(ghidra_run):
+        print(f'[-] path to ghidraRun does not exist:\n  {ghidra_run}')
+        exit(1)
+    
+    args = parse_args()
+
+
+    headless_cmd = [
+        ghidra_headless,
+        args.project_directory,
+        args.project_name,
+    ]
+    if not args.auto_analyze:
+        headless_cmd.append('-noanalysis')
+
+    for arg in [ ('-import', file) for file in args.files]:
+        headless_cmd.extend(arg)
+
+    print(' '.join(headless_cmd))
+    if not args.print_only:
+        subprocess.check_call(headless_cmd)
+    
+    ghidra_cmd = [
+        ghidra_run,
+        os.path.join(args.project_directory, f'{args.project_name}.gpr')
+    ]
+    print(' '.join(ghidra_cmd))
+    if not args.print_only:
+        subprocess.check_call(ghidra_cmd)
+    
+    print('[+] done')
+
+
+if __name__ == "__main__":
+    main()
