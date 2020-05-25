@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Run ghidra (on project file)')
+
+    parser.add_argument('gpr_file',
+        help='path to ghidra project file (.gpr)',
+        nargs='?',
+        default=None)
+    
+    args = parser.parse_args(os.sys.argv[1:])
+    return args
+
+def main():
+    ghidra_dir = os.environ.get('GHIDRA_PATH')
+    if ghidra_dir is None or not os.path.exists(ghidra_dir):
+        print(f'[-] GHIDRA_PATH does not exist or is empty: {ghidra_dir}')
+        exit(1)
+    
+    args = parse_args()
+
+    ghidra_run = os.path.join(ghidra_dir, 'ghidraRun')
+    if not os.path.exists(ghidra_run):
+        print(f'[-] ghidraRun does not exist: {ghidra_run}')
+        exit(1)
+    
+    cmd = [ghidra_run]
+    if args.gpr_file:
+        if not os.path.exists(args.gpr_file):
+            print(f'[-] ghidra project file does not exist: {args.gpr_file}')
+            exit(1)
+        
+        gpr_full_path = os.path.abspath(args.gpr_file)
+        cmd.append(gpr_full_path)
+    
+
+    print(f'launching:\n  {" ".join(cmd)}')
+    subprocess.check_call(cmd)
+    print('[+] done')
+
+
+if __name__ == "__main__":
+    main()
+
