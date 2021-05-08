@@ -84,6 +84,12 @@ export PATH=$PATH:~/.my_scripts
 # create GHIDRA_PATH variable used in .my_scripts
 export GHIDRA_PATH=~/dev/ghidra_9.1.2_PUBLIC/
 
+# local bin path
+export PATH=$PATH:~/bin
+
+# set custom nvim path for using dev version
+export VIMRUNTIME=~/tools/nvim-linux64/share/nvim/runtime/
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -93,6 +99,7 @@ export GHIDRA_PATH=~/dev/ghidra_9.1.2_PUBLIC/
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
 alias vim="nvim"
 alias setclip="xclip -selection c"
@@ -112,3 +119,4 @@ then
 else         
 	# on linux only
 fi
+
