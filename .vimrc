@@ -28,6 +28,9 @@ set expandtab         " tabs to spaces
 set shiftwidth=4      " width for autoindents
 set autoindent        " automatically indent based on previous line
 
+" enable mouse in basically all modes
+set mouse=a
+
 " map ctrl + backspace/h to delete last word in insert/cli mode
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
