@@ -1,6 +1,7 @@
-if (has("termguicolors"))
-  set termguicolors
-endif
+" Does not seem required anymore and can break tmux colors
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
 
 
 call plug#begin()
@@ -13,9 +14,21 @@ call plug#end()
 " enable ruler
 set colorcolumn=80
 
+" enable syntax highlighting
 syntax enable
+
+" theme
 colorscheme codedark
 
+" enable line numbers
+set number
+
+set tabstop=4         " tab size
+set expandtab         " tabs to spaces
+set shiftwidth=4      " width for autoindents
+set autoindent        " automatically indent based on previous line
+
+" map ctrl + backspace/h to delete last word in insert/cli mode
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
