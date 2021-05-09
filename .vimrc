@@ -52,6 +52,29 @@ set mouse=a
 " map ctrl + backspace to delete last word in insert/cli mode
 noremap! <C-BS> <C-w>
 
+" split windows
+nmap ss :split<Return><C-w>w
+nmap sv :vsplit<Return><C-w>w
+
+" move between windows
+map sh <C-w>h
+map sj <C-w>j
+map sk <C-w>k
+map sl <C-w>l
+
+" move windows
+map s<left> <C-w>h
+map s<down> <C-w>j
+map s<up> <C-w>k
+map s<right> <C-w>l
+
+" move between tabs
+nmap <S-Tab> :tabprev<Return>
+nmap <Tab> :tabnext<Return>
+
+" create tab
+nmap te :tabedit
+
 " only search case sensitive if at least one char is upper case
 set ignorecase
 set smartcase
@@ -107,7 +130,7 @@ nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> ge <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> ge <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 
 " C/C++ CLANGD
 lua <<EOF
