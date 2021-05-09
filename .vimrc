@@ -12,6 +12,12 @@ Plug 'tomasiser/vim-code-dark'
 " advanced syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" language server configuration
+Plug 'neovim/nvim-lspconfig'
+
+" auto completion
+Plug 'hrsh7th/nvim-compe'
+
 " toggle comments using v_gc or gcc
 Plug 'tpope/vim-commentary'
 
@@ -49,6 +55,69 @@ noremap! <C-BS> <C-w>
 " only search case sensitive if at least one char is upper case
 set ignorecase
 set smartcase
+
+" .............................................................................
+" hrsh7th/nvim-compe
+" .............................................................................
+lua <<EOF
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'always';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = false;
+    ultisnips = false;
+  };
+}
+EOF
+
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <C-l>     compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" .............................................................................
+" neovim/nvim-lspconfig
+" .............................................................................
+
+" GENERAL
+set completeopt=menuone,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+" KEYBINDS
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> ge <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
+" C/C++ CLANGD
+lua <<EOF
+require'lspconfig'.clangd.setup{}
+EOF
+
+" PYTHON
+lua <<EOF
+require'lspconfig'.pyright.setup{}
+EOF
 
 " .............................................................................
 " nvim-treesitter/nvim-treesitter
