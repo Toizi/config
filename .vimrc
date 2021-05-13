@@ -150,6 +150,11 @@ lua <<EOF
 require'lspconfig'.pyright.setup{}
 EOF
 
+" BASH
+lua <<EOF
+require'lspconfig'.bashls.setup{}
+EOF
+
 " .............................................................................
 " nvim-treesitter/nvim-treesitter
 " .............................................................................
