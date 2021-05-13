@@ -24,6 +24,11 @@ Plug 'tpope/vim-commentary'
 " file manager
 Plug 'lambdalisue/fern.vim'
 
+" make sure latest version is installed
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" fzf integration
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 " enable ruler
