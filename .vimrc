@@ -21,6 +21,9 @@ Plug 'hrsh7th/nvim-compe'
 " toggle comments using v_gc or gcc
 Plug 'tpope/vim-commentary'
 
+" git integration
+Plug 'tpope/vim-fugitive'
+
 " file manager
 Plug 'lambdalisue/fern.vim'
 
