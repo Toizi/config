@@ -120,3 +120,10 @@ else
 	# on linux only
 fi
 
+# node version manager config
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# use ripgrep as default fzf command
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
