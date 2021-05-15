@@ -50,7 +50,6 @@
         }
     ],
     "vim.enableNeovim": true,
-    "window.zoomLevel": 0,
     "sync.gist": "2e68bdc2d1e5565036723662ebbcfc85",
     "sync.token": "51135d90e13b73cc2e10e7d474ef59d97a040de8",
     "sync.lastUpload": "",
@@ -73,5 +72,16 @@
     ],
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "spellright.notificationClass": "warning",
+    "python.languageServer": "Pylance",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "python.showStartPage": false,
+    "window.zoomLevel": 1,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
 }

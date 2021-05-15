@@ -267,5 +267,9 @@
         "key": "ctrl+f",
         "command": "-workbench.action.terminal.focusFindWidget",
         "when": "terminalFindWidgetFocused || terminalFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+t",
+        "command": "workbench.action.tasks.test"
     }
 ]
