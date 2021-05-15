@@ -6,6 +6,7 @@ cp .radare2rc ~
 cp .Xmodmap ~
 cp .dircolors ~
 cp .zshrc ~
+cp .bashrc ~
 cp .tmux.conf ~
 cp -r .my_scripts ~/
 mkdir -p ~/.config/terminator

@@ -3,6 +3,7 @@ cp ~/.radare2rc .
 cp ~/.Xmodmap .
 cp ~/.dircolors .
 cp ~/.zshrc .
+cp ~/.bashrc .
 cp ~/.tmux.conf .
 cp -r ~/.config/terminator .
 cp -r ~/.my_scripts .
