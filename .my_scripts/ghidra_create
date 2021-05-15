@@ -27,6 +27,11 @@ def parse_args():
         help='only print the commands to create the project but do not execute them',
         action='store_true')
     
+    parser.add_argument('--raw',
+        help='raw argument to pass to the headless invocation',
+        action='append',
+        required=False)
+    
     args = parser.parse_args(os.sys.argv[1:])
 
     # convert all paths to absolute ones
@@ -67,6 +72,9 @@ def main():
     ]
     if not args.auto_analyze:
         headless_cmd.append('-noanalysis')
+
+    if args.raw:
+        headless_cmd.extend(args.raw)
 
     for arg in [ ('-import', file) for file in args.files]:
         headless_cmd.extend(arg)
