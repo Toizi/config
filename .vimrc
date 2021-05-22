@@ -23,6 +23,7 @@ Plug 'tpope/vim-commentary'
 
 " git integration
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " file manager
 Plug 'lambdalisue/fern.vim'
@@ -49,10 +50,11 @@ set number
 " always keep num lines between cursor and buffer end
 set scrolloff=3
 
+set autoindent        " automatically indent based on previous line
 set tabstop=4         " tab size
 set expandtab         " tabs to spaces
 set shiftwidth=4      " width for autoindents
-set autoindent        " automatically indent based on previous line
+set shiftround        " >> indents to multiple of 'shiftwidth'
 
 " enable mouse in basically all modes
 set mouse=a
@@ -86,6 +88,14 @@ nmap te :tabedit
 " only search case sensitive if at least one char is upper case
 set ignorecase
 set smartcase
+
+" Show non-printable characters.
+set list
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,trail:★,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,trail:?,extends:>,precedes:<,nbsp:.'
+endif
 
 " .............................................................................
 " hrsh7th/nvim-compe

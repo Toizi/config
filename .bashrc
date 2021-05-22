@@ -105,6 +105,7 @@ alias vim="nvim"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias ll='ls -lathF'            # long, sort by oldest to newest
+alias nvimconf='nvim ~/.config/nvim/init.vim'
 
 
 # add pip packages that are installed with --user to path
