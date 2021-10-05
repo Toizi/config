@@ -88,7 +88,7 @@ export GHIDRA_PATH=~/dev/ghidra_9.1.2_PUBLIC/
 export PATH=$PATH:~/bin
 
 # set custom nvim path for using dev version
-export VIMRUNTIME=~/tools/nvim-linux64/share/nvim/runtime/
+# export VIMRUNTIME=~/tools/nvim-linux64/share/nvim/runtime/
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -98,6 +98,12 @@ export VIMRUNTIME=~/tools/nvim-linux64/share/nvim/runtime/
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# if tmux is executable, X is running, and not inside a tmux session, then try to attach.
+# if attachment fails, start a new session
+if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ]; then
+  [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
+fi
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
@@ -116,7 +122,7 @@ then
 	setopt no_beep
 	setopt NO_LIST_BEEP
 	set bell-style none
-else         
+else
 	# on linux only
 fi
 
