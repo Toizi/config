@@ -8,6 +8,7 @@ call plug#begin()
 
 " theme
 Plug 'tomasiser/vim-code-dark'
+Plug 'mg979/vim-studio-dark'
 
 " advanced syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -16,7 +17,14 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 
 " auto completion
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 " toggle comments using v_gc or gcc
 Plug 'tpope/vim-commentary'
@@ -33,6 +41,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " fzf integration
 Plug 'junegunn/fzf.vim'
 
+" markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 call plug#end()
 
 " enable ruler
@@ -42,7 +53,7 @@ set colorcolumn=80
 syntax enable
 
 " theme
-colorscheme codedark
+colorscheme vsdark
 
 " enable line numbers
 set number
@@ -98,44 +109,103 @@ else
 endif
 
 " .............................................................................
-" hrsh7th/nvim-compe
+" hrsh7th/nvim-cmp
 " .............................................................................
 lua <<EOF
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'always';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
+local cmp = require'cmp'
 
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = false;
-    ultisnips = false;
-  };
-}
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<C-l>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+  -- C/C++ CLANGD
+  require'lspconfig'.clangd.setup {
+    capabilities = capabilities
+  }
+
+  -- PYTHON
+  require'lspconfig'.pyright.setup {
+    capabilities = capabilities
+  }
+
+  -- BASH
+  require'lspconfig'.bashls.setup {
+    capabilities = capabilities
+  }
+
+  -- SOLIDITY
+  require'lspconfig'.solidity_ls.setup {
+    capabilities = capabilities
+  }
+
 EOF
 
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <C-l>     compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+" Snippet config vsnip
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " .............................................................................
 " neovim/nvim-lspconfig
 " .............................................................................
+" individual server setup happens in cmp setup
 
 " GENERAL
 set completeopt=menuone,noselect
@@ -150,27 +220,17 @@ nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> ge <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 
-" C/C++ CLANGD
-lua <<EOF
-require'lspconfig'.clangd.setup{}
-EOF
-
-" PYTHON
-lua <<EOF
-require'lspconfig'.pyright.setup{}
-EOF
-
-" BASH
-lua <<EOF
-require'lspconfig'.bashls.setup{}
-EOF
+" FILETYPE ASSIGNMENT
+au BufRead,BufNewFile *.sol setfiletype solidity
+au BufRead,BufNewFile *.MD setfiletype markdown
 
 " .............................................................................
 " nvim-treesitter/nvim-treesitter
 " .............................................................................
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"c", "cpp", "python", "bash", "html", "lua", "javascript"},
+  ensure_installed = {"c", "cpp", "python", "bash", "html", "lua", "javascript",
+                      "solidity", "markdown"},
                       -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {  },        -- List of parsers to ignore installing
   highlight = {
@@ -227,3 +287,11 @@ augroup fern-custom
   autocmd! *
   autocmd FileType fern call s:init_fern()
 augroup END
+
+
+" .............................................................................
+" iamcco/markdown-preview
+" .............................................................................
+let g:mkdp_refresh_slow = 1
+
+
