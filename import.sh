@@ -1,4 +1,5 @@
 cp ~/.config/nvim/init.vim .vimrc
+cp ~/.config/i3/config .i3config
 cp ~/.radare2rc .
 cp ~/.Xmodmap .
 cp ~/.dircolors .

@@ -2,6 +2,7 @@
 cp .vimrc ~
 mkdir -p ~/.config/nvim/
 cp .vimrc ~/.config/nvim/init.vim
+cp .i3config ~/.config/i3/config
 cp .radare2rc ~
 cp .Xmodmap ~
 cp .dircolors ~
