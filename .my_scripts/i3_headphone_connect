@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -x
+
+# turn on bluetooth if it's not on yet
+if ! systemctl is-active bluetooth.service --quiet; then
+    sudo systemctl start bluetooth.service
+fi
+bluetoothctl -- power on
+
+# attempt to connect a few times since it randomly fails sometimes
+# make sure that /etc/bluetooth/main.conf contains the line
+# Disable=Headset
+# to make sure it's not connecting in headset mode (with mic support, bad codecs)
+for i in {0..5}
+do
+    if bluetoothctl -- connect "60:AB:D2:41:3C:A7"; then
+        break
+    fi
+    sleep 1
+done

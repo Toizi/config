@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# check if the variant is already set
+if setxkbmap -query | grep variant >/dev/null 2>&1; then
+    setxkbmap -layout us
+else
+    setxkbmap -layout us -variant intl
+fi

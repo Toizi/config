@@ -1,0 +1,40 @@
+#!/bin/sh
+
+revert() {
+    xset dpms 0 0 0
+}
+
+lock() {
+    trap revert HUP INT TERM
+    xset +dpms dpms 0 0 10
+    i3lock "$@"
+    revert
+}
+
+COMMON_LOCK_ARGS="--ignore-empty-password --image /usr/share/backgrounds/archlinux/simple.png"
+
+case "$1" in
+    lock)
+        lock --nofork $COMMON_LOCK_ARGS
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        i3lock $COMMON_LOCK_ARGS && systemctl suspend
+        ;;
+    hibernate)
+        i3lock $COMMON_LOCK_ARGS && systemctl hibernate
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    shutdown)
+        systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

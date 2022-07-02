@@ -4,7 +4,7 @@
     //"http.proxyStrictSSL": false,
     "keyboard.dispatch": "keyCode",
     "editor.fontSize": 14,
-    "editor.fontFamily": "Source Code Pro for Powerline, Droid Sans Mono, Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "Source Code Pro, Droid Sans Mono, Consolas, 'Courier New', monospace",
     "editor.autoClosingBrackets": "beforeWhitespace",
     "editor.wordWrap": "on",
     "editor.rulers": [
@@ -16,8 +16,12 @@
     "python.pythonPath": "python",
     "python.linting.enabled": false,
     "C_Cpp.intelliSenseEngine": "Default",
+    "editor.renderWhitespace": "trailing",
     // "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
     "workbench.startupEditor": "none",
+    "workbench.colorCustomizations": {
+        "editorWhitespace.foreground": "#ff0000"
+    },
     "macros": {
         "saveExitInsertMode": [
             "workbench.action.files.save",
@@ -83,5 +87,11 @@
         "**/.project": true,
         "**/.settings": true,
         "**/.factorypath": true
-    }
+    },
+    "solidity.compileUsingRemoteVersion": "v0.8.9+commit.e5eed63a",
+    "rust-analyzer.inlayHints.enable": false,
+    "workbench.colorTheme": "Default Light+",
+    "explorer.confirmDelete": false,
+    "python.defaultInterpreterPath": "python",
+    "editor.inlayHints.enabled": true,
 }

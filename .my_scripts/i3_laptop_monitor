@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+xrandr --output DP-1-2 --off --output HDMI-1-0 --off --output eDP-1 --auto
+picom & >/dev/null 2>&1

@@ -55,6 +55,8 @@ plugins=(git docker)
 
 source $ZSH/oh-my-zsh.sh
 
+source ~/.profile
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,17 +101,20 @@ export PATH=$PATH:~/bin
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# if tmux is executable, X is running, and not inside a tmux session, then try to attach.
-# if attachment fails, start a new session
-if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ]; then
-  [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
-fi
+# # if tmux is executable, X is running, and not inside a tmux session, then try to attach.
+# # if attachment fails, start a new session
+# if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ]; then
+#   [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
+# fi
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
 alias vim="nvim"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+alias i3config="$EDITOR ~/.config/i3/config"
+alias vimconfig="$EDITOR ~/.config/nvim/init.vim"
+alias cat="bat"
 
 grep -q "Microsoft" /proc/sys/kernel/osrelease
 ON_WSL=$?
@@ -133,3 +138,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # use ripgrep as default fzf command
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

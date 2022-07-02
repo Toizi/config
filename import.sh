@@ -1,10 +1,15 @@
 cp ~/.config/nvim/init.vim .vimrc
-cp ~/.config/i3/config .i3config
+cp -r ~/.config/i3 .
+cp -r ~/.config/i3blocks .
 cp ~/.radare2rc .
 cp ~/.Xmodmap .
+cp ~/.xinitrc .
+cp ~/.Xresources .
 cp ~/.dircolors .
 cp ~/.zshrc .
+cp ~/.zprofile .
 cp ~/.bashrc .
+cp ~/.profile .
 cp ~/.tmux.conf .
 cp -r ~/.config/terminator .
 cp -r ~/.my_scripts .
