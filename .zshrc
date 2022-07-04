@@ -84,7 +84,7 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.my_scripts
 
 # create GHIDRA_PATH variable used in .my_scripts
-export GHIDRA_PATH=~/dev/ghidra_9.1.2_PUBLIC/
+export GHIDRA_PATH=/opt/ghidra
 
 # local bin path
 export PATH=$PATH:~/bin
