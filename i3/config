@@ -140,6 +140,9 @@ include workspaces.conf
 assign [class="Code"] $ws2
 # assign [class="KeePassXC"] $ws6
 assign [class="Google-chrome"] $ws7
+# assign [class="Spotify"] $ws7
+# assign is broken for spotify for some reason
+for_window [class="Spotify"] move to workspace $ws7
 assign [class="zoom "] $ws8
 assign [class="Slack"] $ws9
 assign [class="firefox"] $ws10

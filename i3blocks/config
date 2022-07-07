@@ -84,6 +84,8 @@ interval=30
 
 [bandwidth]
 #INTERFACE=eth0
+INLABEL=D 
+OUTLABEL=U 
 interval=15
 
 # Volume indicator
