@@ -113,7 +113,7 @@ alias vim="nvim"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias i3config="$EDITOR ~/.config/i3/config"
-alias vimconfig="$EDITOR ~/.config/nvim/init.vim"
+alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
 
 grep -q "Microsoft" /proc/sys/kernel/osrelease
@@ -139,5 +139,6 @@ export NVM_DIR="$HOME/.nvm"
 # use ripgrep as default fzf command
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/completions.zsh ] && source /usr/share/fzf/completions.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
