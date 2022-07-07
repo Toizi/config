@@ -1,4 +1,4 @@
-cp ~/.config/nvim/init.vim .vimrc
+rsync -ra ~/.config/nvim . --exclude plugin/
 cp -r ~/.config/i3 .
 cp -r ~/.config/i3blocks .
 cp ~/.radare2rc .

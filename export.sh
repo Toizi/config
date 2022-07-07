@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
-cp .vimrc ~
 mkdir -p ~/.config/nvim/
-cp .vimrc ~/.config/nvim/init.vim
+rsync -ra ./nvim/ ~/.config/nvim
 mkdir -p ~/.config/i3/
 rsync -ra ./i3/ ~/.config/i3
 mkdir -p ~/.config/i3blocks/
