@@ -11,6 +11,8 @@
   switch_to_tab_3 = <Alt>3
   switch_to_tab_4 = <Alt>4
   switch_to_tab_5 = <Alt>5
+  hide_window = ""
+  edit_tab_title = ""
   next_profile = <Primary><Shift>p
 [profiles]
   [[default]]
@@ -19,9 +21,10 @@
     background_type = transparent
     cursor_color = "#aaaaaa"
     font = Source Code Pro Medium 12
+    show_titlebar = False
     scrollback_lines = 3000
+    scrollback_infinite = True
     use_system_font = False
-    show_titlebar = false
   [[transparent]]
     background_darkness = 0.62
     background_type = transparent
