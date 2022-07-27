@@ -115,6 +115,7 @@ alias getclip="xclip -selection c -o"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
+alias sudovim="sudo -E -s nvim"
 
 grep -q "Microsoft" /proc/sys/kernel/osrelease
 ON_WSL=$?
