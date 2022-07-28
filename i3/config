@@ -144,7 +144,8 @@ assign [class="Google-chrome"] $ws7
 # assign is broken for spotify for some reason
 for_window [class="Spotify"] move to workspace $ws7
 assign [class="zoom "] $ws8
-assign [class="Slack"] $ws9
+assign [class="Slack|Signal"] $ws9
+for_window [class="Slack|Signal"] layout tabbed
 assign [class="firefox"] $ws10
 
 # switch to workspace
@@ -256,6 +257,9 @@ mode "$mode_display" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Control+d mode "$mode_display"
+
+# take screenshot and save it in clipboard
+bindsym $mod+Control+s exec --no-startup-id /usr/bin/flameshot gui -c
 
 # auto lock screen
 exec --no-startup-id xidlehook --not-when-audio --timer 180 '~/.my_scripts/i3_exit lock' ''
