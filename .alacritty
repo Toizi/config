@@ -1,10 +1,12 @@
+# check /usr/share/doc/alacritty/example/alacritty.yml for reference
+
 scrolling:
   history: 100000
 
-colors:
-  primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+window:
+  padding:
+    x: 2
+    y: 0
 
 font:
   normal:
