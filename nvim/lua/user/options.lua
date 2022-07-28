@@ -1,6 +1,6 @@
 
 local options = {
-    clipboard = "unnamedplus",
+    -- clipboard = "unnamedplus",
     cmdheight = 2,
     colorcolumn = "80",
     completeopt = { "menuone", "noselect" },
