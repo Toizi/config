@@ -33,4 +33,14 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
+-- Show non-printable characters.
+vim.cmd([["
+set list
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,trail:★,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,trail:?,extends:>,precedes:<,nbsp:.'
+endif
+]])
+
 vim.cmd "set whichwrap+=<,>,[,],h,l"
