@@ -55,7 +55,13 @@ colors:
 
 key_bindings:
   # 57 is space in case xmodmap is used to bind shift+space to underscore
-  - { key: 57,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+  - { key: 57,  mods: Shift|Control,    mode: ~Search,    action: ToggleViMode            }
   # ? reverse search workaround https://github.com/alacritty/alacritty/issues/3460
-  - { key: 53,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
+  - { key: 53,  mods: Shift,            mode: Vi|~Search, action: SearchBackward          }
+  # exit vi mode after copying
+  - { key: Y,                           mode: Vi|~Search, action: Copy                    }
+  - { key: Y,                           mode: Vi|~Search, action: ClearSelection          }
+  - { key: Y,                           mode: Vi|~Search, action: ToggleViMode            }
+
+
 
