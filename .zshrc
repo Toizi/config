@@ -117,6 +117,8 @@ alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
 alias sudovim="sudo -E -s nvim"
 
+export sysd="/etc/systemd/system/"
+
 grep -q "Microsoft" /proc/sys/kernel/osrelease
 ON_WSL=$?
 if [ $ON_WSL -eq 0 ]
