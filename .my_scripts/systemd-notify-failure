@@ -2,7 +2,7 @@
 
 # check if we failed
 # https://www.freedesktop.org/software/systemd/man/systemd.exec.html
-if [ $SERVICE_RESULT == "success" ] && [ $EXIT_CODE == "exited" ];
+if [ "$SERVICE_RESULT" == "success" ] && [ "$EXIT_CODE" == "exited" ];
 then
 	exit 0
 fi
