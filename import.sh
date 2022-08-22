@@ -1,6 +1,7 @@
 rsync -ra ~/.config/nvim . --exclude plugin/
 cp -r ~/.config/i3 .
 cp -r ~/.config/i3blocks .
+cp ~/.config/picom/picom.conf .
 cp ~/.radare2rc .
 cp ~/.Xmodmap .
 cp ~/.xinitrc .
