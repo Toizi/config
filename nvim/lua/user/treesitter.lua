@@ -5,7 +5,7 @@ end
 
 configs.setup({
     ensure_installed = {"c", "cpp", "python", "bash", "html", "lua",
-        "javascript", "solidity", "markdown"},
+        "javascript", "solidity", "markdown", "rust"},
 	ignore_install = { "" }, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
