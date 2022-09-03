@@ -144,8 +144,8 @@ assign [class="Google-chrome"] $ws7
 # assign is broken for spotify for some reason
 for_window [class="Spotify"] move to workspace $ws7
 assign [class="zoom "] $ws8
-assign [class="Slack|Signal|Thunderbird"] $ws9
-for_window [class="Slack|Signal|Thunderbird"] layout tabbed
+assign [class="Slack|Signal|thunderbird"] $ws9
+for_window [class="Slack|Signal|thunderbird"] layout tabbed
 assign [class="firefox"] $ws10
 
 # switch to workspace
