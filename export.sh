@@ -7,6 +7,8 @@ mkdir -p ~/.config/i3blocks/
 rsync -ra ./i3blocks/ ~/.config/i3blocks
 mkdir -p ~/.config/picom
 cp picom.conf ~/.config/picom/
+mkdir -p ~/.config/helix
+cp helix.toml ~/.config/helix/config.toml
 cp .radare2rc ~
 cp .Xmodmap ~
 cp .xinitrc ~

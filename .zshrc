@@ -116,6 +116,7 @@ alias i3config="$EDITOR ~/.config/i3/config"
 alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
 alias sudovim="sudo -E -s nvim"
+alias hx="helix"
 
 export sysd="/etc/systemd/system/"
 
