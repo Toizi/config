@@ -13,7 +13,7 @@ cp ~/.bashrc .
 cp ~/.profile .
 cp ~/.tmux.conf .
 cp -r ~/.config/terminator .
-cp ~/.config/alacritty/alacritty.yml ./.alacritty
+cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/helix/config.toml helix.toml
 cp -r ~/.my_scripts .
 cp ~/.config/Code/User/keybindings.json ~/.config/Code/User/settings.json ./Code/User/

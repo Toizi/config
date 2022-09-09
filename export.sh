@@ -23,7 +23,7 @@ rsync -ra ./.my_scripts ~/
 mkdir -p ~/.config/terminator
 rsync -ra ./terminator/ ~/.config/terminator/
 mkdir -p ~/.config/alacritty/
-cp .alacritty.yml ~/.config/alacritty/alacritty.yml
+cp alacritty.yml ~/.config/alacritty/alacritty.yml
 mkdir -p ~/.config/Code/User/
 rsync -ra Code/User/ ~/.config/Code/User/
 
