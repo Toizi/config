@@ -5,6 +5,8 @@ mkdir -p ~/.config/i3/
 rsync -ra ./i3/ ~/.config/i3
 mkdir -p ~/.config/i3blocks/
 rsync -ra ./i3blocks/ ~/.config/i3blocks
+mkdir -p ~/.config/redshift
+rsync -ra ./redshift/ ~/.config/redshift
 mkdir -p ~/.config/picom
 cp picom.conf ~/.config/picom/
 mkdir -p ~/.config/helix
