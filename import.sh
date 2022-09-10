@@ -18,5 +18,5 @@ cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/helix/config.toml helix.toml
 cp -r ~/.my_scripts .
 cp ~/.config/Code/User/keybindings.json ~/.config/Code/User/settings.json ./Code/User/
-code --list-extensions > vscode_extensions.txt
+# code --list-extensions > vscode_extensions.txt
 
