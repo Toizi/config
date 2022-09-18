@@ -31,6 +31,6 @@ cp alacritty.yml ~/.config/alacritty/alacritty.yml
 mkdir -p ~/.config/Code/User/
 rsync -ra Code/User/ ~/.config/Code/User/
 
-echo "installing vscode extensions"
+# echo "installing vscode extensions"
 # ./install_extensions.py
 
