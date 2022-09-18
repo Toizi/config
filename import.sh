@@ -1,4 +1,5 @@
 rsync -ra ~/.config/nvim . --exclude plugin/
+rsync -ra ~/.config/lvim . --exclude plugin/
 cp -r ~/.config/i3 .
 cp -r ~/.config/i3blocks .
 cp -r ~/.config/redshift .

@@ -109,7 +109,7 @@ export PATH=$PATH:~/bin
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
-alias vim="nvim"
+alias vim="lvim"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias i3config="$EDITOR ~/.config/i3/config"
