@@ -106,6 +106,7 @@ export PATH=$PATH:~/bin
 # if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ]; then
 #   [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
 # fi
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
