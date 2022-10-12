@@ -30,6 +30,9 @@ else
 endif
 ]])
 
+-- modify which keys go to start/end of next line
+vim.opt.whichwrap = "[,],b,s"
+
 -- cmp (auto-completion) config
 local cmp = require("cmp")
 -- disable always-on text preview for auto-completion
