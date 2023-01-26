@@ -118,6 +118,7 @@ alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
 alias sudovim="sudo -E -s nvim"
 alias hx="helix"
+alias rg="rg --colors 'path:fg:yellow'"
 
 export sysd="/etc/systemd/system/"
 
