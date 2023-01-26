@@ -125,6 +125,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
+  "cpp",
   "javascript",
   "json",
   "lua",
@@ -210,3 +211,6 @@ lvim.plugins = {
     end,
   },
 }
+
+-- turn off automatic pair insertion
+table.insert(lvim.builtin.autopairs.disable_filetype, "markdown")

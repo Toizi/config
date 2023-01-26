@@ -1,0 +1,15 @@
+{
+    "name": "nvim-snippets",
+    "author": "toizi",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": "markdown",
+                "path": "../../../.vsnip/markdown.json"
+            }
+        ]
+    }
+}
