@@ -116,7 +116,7 @@ alias getclip="xclip -selection c -o"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
-alias sudovim="sudo -E -s nvim"
+alias sudovim="sudo -E -s lvim"
 alias hx="helix"
 alias rg="rg --colors 'path:fg:yellow'"
 
