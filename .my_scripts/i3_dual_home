@@ -1,8 +1,8 @@
 #!/bin/sh
 
-MON1="HDMI-1-0"
-MON2="DP-1-2"
-MONLAP="eDP-1"
+MON1="HDMI-A-0"
+MON2="DisplayPort-0"
+MONLAP="eDP"
 
 if (xrandr | grep "$MON1 connected") && (xrandr | grep "$MON2 connected"); then
     xrandr --output "$MON2" --auto --right-of "$MON1" --output "$MON1" --mode "2560x1440" --rate "59.95" --output "$MONLAP" --off
