@@ -14,7 +14,9 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = false
 
-lvim.colorscheme = "vsdark"
+-- lvim.colorscheme = "vsdark"
+lvim.colorscheme = "ayu"
+vim.opt.background = "light"
 
 -- don't use system clipboard for all yank operations
 vim.opt.clipboard = ""
@@ -113,10 +115,13 @@ lvim.builtin.telescope.defaults.mappings = {
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.vmappings["y"] = { "\"+y", "Copy to clipboard" }
 
+-- Open references in telescope instead of the quickfix window
+lvim.lsp.buffer_mappings.normal_mode["gr"] = {  "<cmd>Telescope lsp_references<cr>", "References (telescope)" }
+lvim.lsp.buffer_mappings.normal_mode["gR"] = {  vim.lsp.buf.references, "References (Quick fix)" }
+
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
@@ -162,6 +167,7 @@ lvim.plugins = {
   -- contains both dark and light theme depending on the surroundings
   -- use `set background=light` to active light theme
   {"mg979/vim-studio-dark"},
+  {"Shatur/neovim-ayu"},
   {
    "simrat39/rust-tools.nvim",
     -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
