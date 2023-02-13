@@ -1,5 +1,5 @@
 rsync -ra ~/.config/nvim . --exclude plugin/
-rsync -ra ~/.config/lvim . --exclude plugin/
+rsync -ra ~/.config/lvim . --exclude plugin/ --exclude lazy-lock.json
 cp -r ~/.config/i3 .
 cp -r ~/.config/i3blocks .
 cp -r ~/.config/redshift .
