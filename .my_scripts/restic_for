@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [[ "$#" -lt 2 ]]; then
+  echo "Usage: $0 restic.conf restic_args..."
+  echo "Examples: $0 /etc/restic/restic-home/restic-rest.conf mount /mnt/backup"
+  exit 1
+fi
+
+CONFIG_FILE=$1
+shift
+
+CMD=". ~mg/.my_scripts/export-env \"${CONFIG_FILE}\"; restic $@"
+sudo sh -c "${CMD}"
