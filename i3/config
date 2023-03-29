@@ -271,7 +271,7 @@ exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id feh --bg-scale /usr/share/backgrounds/archlinux/split.png
 
 # keyboard layout switching
-bindsym $mod+i exec ~/.my_scripts/i3_toggle_us_intl
+bindsym $mod+i exec --no-startup-id ~/.my_scripts/i3_toggle_us_intl
 
 # try to switch to default monitor setup
 exec --no-startup-id ~/.my_scripts/i3_default_monitor
