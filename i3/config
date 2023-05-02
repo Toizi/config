@@ -56,6 +56,9 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# disable moving the mouse to the middle of windows
+mouse_warping none
+
 # start a terminal
 bindsym $mod+Return exec alacritty
 
