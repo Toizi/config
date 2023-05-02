@@ -131,6 +131,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
   "cpp",
+  "go",
   "javascript",
   "json",
   "lua",
@@ -167,7 +168,30 @@ lvim.plugins = {
   -- contains both dark and light theme depending on the surroundings
   -- use `set background=light` to active light theme
   {"mg979/vim-studio-dark"},
-  {"Shatur/neovim-ayu"},
+  {
+    "Shatur/neovim-ayu",
+    config = function()
+      -- change background colors of git diff to make it more readable on light
+      -- theme
+      require("ayu").setup({
+        overrides = function()
+          if vim.o.background == 'light' then
+            return
+              {
+                -- DiffAdd = { fg = '#99BF4D', bg = '#E0E7CD'},
+                -- DiffChange = { fg = '#709ECC' },
+                -- DiffText = { fg = '#F27983', bg = '#F9EBE4'},
+                --
+                DiffAdd = { bg = '#f2ffe6'},
+                DiffChange = { bg = '#F1FDFF'},
+                DiffText = { bg = '#E4FCFF'},
+              }
+          end
+          return {}
+        end
+      })
+    end,
+  },
   {
    "simrat39/rust-tools.nvim",
     -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
