@@ -144,14 +144,15 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
--- lsp config
-lvim.lsp.diagnostics.underline = false
+vim.diagnostic.config({
+  -- lsp config
+  underline = false,
+  -- disable inline diagnostics
+  virtual_text = false,
+})
 
 -- disable automatic installation of servers
 lvim.lsp.installer.setup.automatic_installation = false
-
--- disable inline diagnostics
-lvim.lsp.diagnostics.virtual_text = false
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 vim.api.nvim_create_autocmd("FileType", {
