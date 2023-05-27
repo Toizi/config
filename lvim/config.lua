@@ -15,7 +15,8 @@ lvim.log.level = "warn"
 lvim.format_on_save = false
 
 -- lvim.colorscheme = "vsdark"
-lvim.colorscheme = "ayu"
+-- lvim.colorscheme = "ayu"
+lvim.colorscheme = "vscode"
 vim.opt.background = "light"
 
 -- don't use system clipboard for all yank operations
@@ -192,6 +193,12 @@ lvim.plugins = {
         end
       })
     end,
+  },
+  {
+    "Mofiqul/vscode.nvim",
+    -- require("vscode").setup({
+
+    -- })
   },
   {
    "simrat39/rust-tools.nvim",
