@@ -1,0 +1,12 @@
+#!/bin/sh
+if [[ "$#" -ne 1 ]]; then
+  echo "Usage: $0 0..100"
+  echo "Examples: $0 50"
+  exit 1
+fi
+
+if ! (lsmod | grep i2c_dev -q); then
+  echo "Loading required kernel module"
+  sudo modprobe i2c-dev
+fi
+ddcutil detect | grep Display | awk '{print $2}' | xargs -I_ ddcutil --display _ setvcp 10 $1
