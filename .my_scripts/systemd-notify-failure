@@ -17,4 +17,5 @@ user="$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)"
 #Detect the id of the user
 uid=$(id -u $user)
 
-sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send "$@"
+sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send "$@
+exit code: ${EXIT_STATUS}"
