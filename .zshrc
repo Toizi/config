@@ -145,6 +145,18 @@ export NVM_DIR="$HOME/.nvm"
 # use ripgrep as default fzf command
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
-[ -f /usr/share/fzf/completions.zsh ] && source /usr/share/fzf/completions.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
