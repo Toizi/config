@@ -107,6 +107,7 @@ export PATH=$PATH:~/bin
 #   [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
 # fi
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME="OneHalfLight"
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
