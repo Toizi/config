@@ -25,32 +25,62 @@ font:
 
 draw_bold_text_with_bright_colors: false
 
-# Colors (Pencil Dark)
+# # Colors (Pencil Dark)
+# colors:
+#   # Default Colors
+#   primary:
+#     background: '0x212121'
+#     foreground: '0xf1f1f1'
+#   # Normal colors
+#   normal:
+#     black:   '0x212121'
+#     red:     '0xc30771'
+#     green:   '0x10a778'
+#     yellow:  '0xa89c14'
+#     blue:    '0x008ec4'
+#     magenta: '0x523c79'
+#     cyan:    '0x20a5ba'
+#     white:   '0xe0e0e0'
+#   # Bright colors
+#   bright:
+#     black:   '0x818181'
+#     red:     '0xfb007a'
+#     green:   '0x5fd7af'
+#     yellow:  '0xf3e430'
+#     blue:    '0x20bbfc'
+#     magenta: '0x6855de'
+#     cyan:    '0x4fb8cc'
+#     white:   '0xf1f1f1'
+
+# Colors (Ayu Light)
 colors:
-  # Default Colors
+  # Default colors - taken from ayu-colors
   primary:
-    background: '0x212121'
-    foreground: '0xf1f1f1'
-  # Normal colors
+    background: '0xFCFCFC'
+    foreground: '0x5C6166'
+
+  # Normal colors - taken from ayu-iTerm
   normal:
-    black:   '0x212121'
-    red:     '0xc30771'
-    green:   '0x10a778'
-    yellow:  '0xa89c14'
-    blue:    '0x008ec4'
-    magenta: '0x523c79'
-    cyan:    '0x20a5ba'
-    white:   '0xe0e0e0'
-  # Bright colors
+    black:   '0x010101'
+    red:     '0xe7666a'
+    green:   '0x80ab24'
+    yellow:  '0xeba54d'
+    blue:    '0x4196df'
+    magenta: '0x9870c3'
+    cyan:    '0x51b891'
+    white:   '0xc1c1c1'
+
+  # Bright colors - pastel lighten 0.1 <normal> except black lighten with 0.2
   bright:
-    black:   '0x818181'
-    red:     '0xfb007a'
-    green:   '0x5fd7af'
-    yellow:  '0xf3e430'
-    blue:    '0x20bbfc'
-    magenta: '0x6855de'
-    cyan:    '0x4fb8cc'
-    white:   '0xf1f1f1'
+    black:   '0x343434'
+    red:     '0xee9295'
+    green:   '0x9fd32f'
+    yellow:  '0xf0bc7b'
+    blue:    '0x6daee6'
+    magenta: '0xb294d2'
+    cyan:    '0x75c7a8'
+    white:   '0xdbdbdb'
+
 
 
 key_bindings:
