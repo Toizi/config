@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "No filename specified"
+	exit
+fi
+
+if [ ! -f "$1" ]; then
+  echo "File does not exist"
+  exit
+fi
+
+echo watching $1....
+OUT="$(mktemp /tmp/md_watch.XXXXXXXX.pdf)"
+VIEWER_PID=0
+
+function cleanup()
+{
+  if [[ $VIEWER_PID -ne 0 ]]; then
+    echo "killing viewer ${VIEWER_PID}"
+    kill "$VIEWER_PID"
+  fi
+  rm "$OUT"
+  exit
+}
+trap cleanup SIGINT
+
+while true;
+do
+  pandoc "$1" -o "$OUT"
+  if [[ $VIEWER_PID -eq 0 ]]; then
+    zathura "$OUT" & 2>/dev/null
+    VIEWER_PID=$!
+  fi
+	inotifywait -e modify "$1" >/dev/null 2>&1
+done
