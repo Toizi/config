@@ -5,6 +5,7 @@ cp -r ~/.config/i3blocks .
 cp -r ~/.config/redshift .
 cp ~/.config/picom/picom.conf .
 cp ~/.radare2rc .
+cp ~/.config/git/config .gitconfig
 cp ~/.Xmodmap .
 cp ~/.xinitrc .
 cp ~/.Xresources .

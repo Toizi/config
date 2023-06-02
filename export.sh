@@ -14,6 +14,8 @@ cp picom.conf ~/.config/picom/
 mkdir -p ~/.config/helix
 cp helix.toml ~/.config/helix/config.toml
 cp .radare2rc ~
+mkdir -p ~/.config/git
+cp .gitconfig ~/.config/git/config
 cp .Xmodmap ~
 cp .xinitrc ~
 cp .Xresources ~
