@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+echo "setting up buttons"
+xsetwacom set "HUION PenTablet Pad pad" button 1 key Ctrl Z
+xsetwacom set "HUION PenTablet Pad pad" button 2 key Shift Ctrl E
+xsetwacom set "HUION PenTablet Pad pad" button 3 key Shift Ctrl P
+
+xsetwacom set "HUION PenTablet Pad pad" button 8 key Ctrl Shift =
+xsetwacom set "HUION PenTablet Pad pad" button 9 key Ctrl -
+
+xsetwacom set "HUION PenTablet Pad pad" button 12 key Ctrl Shift A
+
+echo "limiting to second screen only"
+xsetwacom set "HUION PenTablet Pen stylus" MapToOutput "2560x1440+2560+0"
+
+echo "stylus buttons should be set up manually in xournalpp"
+echo "go to: edit > preferences > stylus"
+echo "  button 1: eraser"
+echo "  button 2: highlighter"
