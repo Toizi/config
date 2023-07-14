@@ -108,6 +108,10 @@ export PATH=$PATH:~/bin
 # fi
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="OneHalfLight"
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
