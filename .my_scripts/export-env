@@ -1,8 +1,8 @@
 #!/bin/sh
 
 ## Usage:
-##   . ./export-env.sh ; $COMMAND
-##   . ./export-env.sh ; echo ${MINIENTREGA_FECHALIMITE}
+##   . export-env.sh ; $COMMAND
+##   . export-env.sh ; echo ${SOME_VAR}
 
 read -r -d '' PYTHON_SCRIPT << EOM
 import regex
