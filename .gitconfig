@@ -7,6 +7,8 @@
 [delta]
   features = decorations
   side-by-side = true
+  syntax-theme = "Monokai Extended Light"
+
 
 [delta "interactive"]
   keep-plus-minus-markers = false

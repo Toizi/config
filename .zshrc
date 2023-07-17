@@ -107,7 +107,8 @@ export PATH=$PATH:~/bin
 #   [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
 # fi
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export BAT_THEME="OneHalfLight"
+export MANROFFOPT='-c'
+export BAT_THEME="Monokai Extended Light"
 alias bathelp='bat --plain --language=help'
 help() {
     "$@" --help 2>&1 | bathelp
