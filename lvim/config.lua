@@ -211,6 +211,7 @@ lvim.plugins = {
 
     -- })
   },
+  { "tpope/vim-sleuth" },
   {
    "simrat39/rust-tools.nvim",
     ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
