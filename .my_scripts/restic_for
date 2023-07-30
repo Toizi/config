@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 if [[ "$#" -lt 2 ]]; then
   echo "Usage: $0 restic.conf restic_args..."
@@ -10,4 +10,4 @@ CONFIG_FILE=$1
 shift
 
 CMD=". ~mg/.my_scripts/export-env \"${CONFIG_FILE}\"; restic $@"
-sudo -E -s sh -c "${CMD}"
+sudo -E -s zsh -c "${CMD}"
