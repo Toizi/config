@@ -51,4 +51,4 @@ fi
 picom &
 dunst &
 redshift &
-exec ssh-agent dbus-launch i3
+exec ssh-agent i3
