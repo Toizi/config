@@ -120,6 +120,9 @@ lvim.builtin.which_key.vmappings["y"] = { "\"+y", "Copy to clipboard" }
 lvim.lsp.buffer_mappings.normal_mode["gr"] = { "<cmd>Telescope lsp_references<cr>", "References (telescope)" }
 lvim.lsp.buffer_mappings.normal_mode["gR"] = { vim.lsp.buf.references, "References (Quick fix)" }
 
+-- Quick access to search through open buffers
+lvim.builtin.which_key.mappings["o"] = { "<cmd>Telescope buffers initial_mode=insert previewer=false<cr>", "Find buffer" }
+
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
