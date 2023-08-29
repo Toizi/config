@@ -33,6 +33,10 @@ else
 endif
 ]])
 
+-- don't insert a newline at the end of the file on write since some linters
+-- flag that as an issue
+vim.opt.fixeol = false
+
 -- modify which keys go to start/end of next line
 vim.opt.whichwrap = "[,],b,s"
 
