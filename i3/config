@@ -262,7 +262,7 @@ mode "$mode_display" {
 bindsym $mod+Control+d mode "$mode_display"
 
 # take screenshot and save it in clipboard
-bindsym $mod+Control+s exec --no-startup-id /usr/bin/flameshot gui -c
+bindsym $mod+Control+s exec --no-startup-id /usr/bin/flameshot gui
 
 # auto lock screen
 exec --no-startup-id xidlehook --not-when-audio --timer 180 '~/.my_scripts/i3_exit lock' ''
