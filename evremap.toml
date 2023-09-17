@@ -1,0 +1,5 @@
+device_name = "USB-HID Keyboard"
+
+[[remap]]
+input = ["KEY_LEFTSHIFT", "KEY_SPACE"]
+output = ["KEY_LEFTSHIFT", "KEY_MINUS"]

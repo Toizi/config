@@ -1,5 +1,9 @@
 rsync -ra ~/.config/nvim . --exclude plugin/
 rsync -ra ~/.config/lvim . --exclude plugin/ --exclude lazy-lock.json --exclude ignore
+cp -r ~/.config/sway .
+cp -r ~/.config/swaylock .
+cp -r ~/.config/waybar .
+cp -r ~/.config/gammastep .
 cp -r ~/.config/i3 .
 cp -r ~/.config/i3blocks .
 cp -r ~/.config/redshift .
@@ -15,6 +19,7 @@ cp ~/.zprofile .
 cp ~/.bashrc .
 cp ~/.profile .
 cp ~/.tmux.conf .
+cp /etc/evremap.toml .
 cp -r ~/.config/terminator .
 cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/helix/config.toml helix.toml

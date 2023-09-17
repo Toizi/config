@@ -3,6 +3,14 @@ mkdir -p ~/.config/nvim/
 rsync -ra ./nvim/ ~/.config/nvim
 mkdir -p ~/.config/lvim/
 rsync -ra ./lvim/ ~/.config/lvim
+mkdir -p ~/.config/sway/
+rsync -ra ./sway/ ~/.config/sway
+mkdir -p ~/.config/waybar/
+rsync -ra ./waybar/ ~/.config/waybar
+mkdir -p ~/.config/swaylock/
+rsync -ra ./swaylock/ ~/.config/swaylock
+mkdir -p ~/.config/gammastep/
+rsync -ra ./gammastep/ ~/.config/gammastep
 mkdir -p ~/.config/i3/
 rsync -ra ./i3/ ~/.config/i3
 mkdir -p ~/.config/i3blocks/

@@ -6,8 +6,10 @@ if [ "$SERVICE_RESULT" == "success" ] && [ "$EXIT_CODE" == "exited" ];
 then
 	exit 0
 fi
-# The following is not perfect but better than hardcoding the user display/completely
 
+if [ -z "$WAYLAND_DISPLAY" ]
+then
+# The following is not perfect but better than hardcoding the user display/completely
 #Detect the name of the display in use
 display=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | head -n 1)"
 
@@ -19,3 +21,9 @@ uid=$(id -u $user)
 
 sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send "$@
 exit code: ${EXIT_STATUS}"
+else
+# on wayland it just works :)
+notify-send "$@
+exit code: ${EXIT_STATUS}"
+fi
+
