@@ -242,12 +242,14 @@ bindsym $mod+Control+d mode "$mode_display"
 # TODO: currently broken
 bindsym $mod+Control+s exec --no-startup-id /usr/bin/flameshot gui
 
-# auto lock screen after 3 minutes and turn off screen after 25s if locked
+# auto lock screen after 3 minutes and turn off screen after 25s if locked.
+# need to specify timeout for turning off screen twice since the entry for 25
+# will only fire once after 25 seconds where swaylock is not active yet
 exec swayidle -w \
-         timeout 180 'swaylock' \
-         timeout 25 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
-         resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock'
+         timeout 180 'swaylock -f' \
+         timeout 25 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' resume 'swaymsg "output * power on"' \
+         timeout 205 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f'
 
 
 # polkit authentication
