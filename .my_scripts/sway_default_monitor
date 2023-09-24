@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for script in ~/.config/sway/monitors/*
+do
+  if "$script"; then
+    exit 0
+  fi
+done

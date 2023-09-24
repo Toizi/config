@@ -1,6 +1,7 @@
 # Read `man 5 sway` for a complete reference.
 
 # TODO:
+# - fix evremap not working when tapping shift+space
 # - figure out screenshotting, flameshot doesn't seem to work for whatever reason
 # - find replacement for redshift that works with nvidia gpu
 # - check out how to run spotify (needs XWayland maybe?)
@@ -25,16 +26,16 @@ font FontAwesome:monospace 12
 # exec --no-startup-id dex --autostart --environment i3
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # dim screen using laptop built-ins
 bindsym XF86MonBrightnessUp exec brightnessctl set +10%
@@ -118,9 +119,6 @@ set $ws8 "8: meet"
 set $ws9 "9: msg"
 set $ws10 "10: web"
 
-# assign workspaces to certain monitors
-include workspaces.conf
-
 # assign programs to workspaces
 # don't assign since prompts will always land on the same ws
 # assign [app_id="org.keepassxc.KeePassXC" floating=false] $ws6
@@ -201,7 +199,7 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     # turning off screen after locking happens automatically via swayidle config
     bindsym l exec --no-startup-id swaylock, mode "default"
-    bindsym e exec --no-startup-id swaymsg logout, mode "default"
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -266,8 +264,8 @@ input * {
 # keyboard layout switching
 bindsym $mod+i input * xkb_switch_layout next
 
-# try to switch to default monitor setup
-# exec --no-startup-id ~/.my_scripts/sway_default_monitor
+# try to switch to default monitor setup and assign workspaces accordingly
+exec_always ~/.my_scripts/sway_default_monitor
 
 # Set Zoom notification window to floating with no focus
 for_window [title="^zoom\s?$"] floating enable
