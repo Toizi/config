@@ -12,7 +12,6 @@ cp ~/.radare2rc .
 cp ~/.config/git/config .gitconfig
 cp ~/.Xmodmap .
 cp ~/.xinitrc .
-cp ~/.Xresources .
 cp ~/.dircolors .
 cp ~/.zshrc .
 cp ~/.zprofile .
