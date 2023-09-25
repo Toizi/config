@@ -132,6 +132,8 @@ alias cat="bat"
 alias sudovim="sudo -E -s lvim"
 alias hx="helix"
 alias rg="rg --colors 'path:fg:yellow'"
+alias sd="systemctl" # systemd
+alias ssd="sudo systemctl" # sudo systemd
 
 export sysd="/etc/systemd/system/"
 
