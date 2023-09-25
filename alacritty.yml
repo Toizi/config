@@ -93,6 +93,7 @@ key_bindings:
   - { key: Y,                           mode: Vi|~Search, action: Copy                    }
   - { key: Y,                           mode: Vi|~Search, action: ClearSelection          }
   - { key: Y,                           mode: Vi|~Search, action: ToggleViMode            }
+  - { key: Return, mods: Control|Super,                   action: SpawnNewInstance        }
 
 
 
