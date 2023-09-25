@@ -120,6 +120,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# go back and forth between workspaces
+bindsym $mod+Control+o workspace back_and_forth
+
 # focus the child container
 #bindsym $mod+d focus child
 
