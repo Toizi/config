@@ -127,6 +127,12 @@ lvim.lsp.buffer_mappings.normal_mode["gR"] = { vim.lsp.buf.references, "Referenc
 -- Quick access to search through open buffers
 lvim.builtin.which_key.mappings["o"] = { "<cmd>Telescope buffers initial_mode=insert previewer=false<cr>", "Find buffer" }
 
+-- Show suggestions for folding
+lvim.builtin.which_key.setup.plugins.presets.z = true
+vim.opt.foldmethod = "expr" -- default is "normal"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- default is ""
+vim.opt.foldenable = false -- don't fold when opening document
+
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
