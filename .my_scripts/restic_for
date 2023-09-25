@@ -10,4 +10,4 @@ CONFIG_FILE=$1
 shift
 
 CMD=". ~mg/.my_scripts/export-env \"${CONFIG_FILE}\"; restic $@"
-sudo -E -s zsh -c "${CMD}"
+sudo -s zsh -c "${CMD}"
