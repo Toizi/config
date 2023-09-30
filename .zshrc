@@ -66,7 +66,7 @@ source ~/.profile
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+   export EDITOR='lvim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -133,7 +133,7 @@ alias sudovim="sudo -E -s lvim"
 alias hx="helix"
 alias rg="rg --colors 'path:fg:yellow'"
 alias sd="systemctl" # systemd
-alias ssd="sudo systemctl" # sudo systemd
+alias ssd="sudo -s -E systemctl" # sudo systemd
 
 export sysd="/etc/systemd/system/"
 
