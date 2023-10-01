@@ -4,6 +4,9 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   # fixes invisible cursor
   export WLR_NO_HARDWARE_CURSORS=1
 
+  # unsure if this is strictly better than the default
+  export WLR_RENDERER=vulkan
+
   # recommended settings by flameshot
   # https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
   export SDL_VIDEODRIVER=wayland
@@ -12,8 +15,11 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   export XDG_CURRENT_DESKTOP=sway
   export XDG_SESSION_DESKTOP=sway
 
+  # app specific settings
+  export MOZ_ENABLE_WAYLAND=1
+
   # allow keepass to populate ssh keys via agent
-  exec ssh-agent sway --unsupported-gpu
+  exec ssh-agent sway --unsupported-gpu > /tmp/sway.log 2>&1
 fi
 if command -v startx > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx
