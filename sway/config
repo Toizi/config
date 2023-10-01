@@ -106,6 +106,9 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# move back and forth between workspaces by repeating switch command
+workspace_auto_back_and_forth yes
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -115,9 +118,9 @@ set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8: meet"
-set $ws9 "9: msg"
-set $ws10 "10: web"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # assign programs to workspaces
 # don't assign since prompts will always land on the same ws
@@ -249,6 +252,8 @@ exec swayidle -w \
          timeout 205 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f'
 
+# don't lock the screen if audio is playing
+exec sway-audio-idle-inhibit
 
 # polkit authentication
 exec --no-startup-id /usr/bin/lxqt-policykit-agent
