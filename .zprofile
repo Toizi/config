@@ -1,4 +1,5 @@
 export PATH="/home/mg/.local/share/solana/install/active_release/bin:$PATH"
+export PATH="/home/mg/.foundry/bin:$PATH"
 
 if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   # fixes invisible cursor
