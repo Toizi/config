@@ -5,6 +5,8 @@ if [[ "$#" -lt 1 ]]; then
   echo "Examples: $0 rest show"
   echo "          $0 local snapshots"
   echo "          $0 local mount /mnt/backup"
+  echo "          $0 local schedule"
+  echo "          $0 local unschedule"
   exit 1
 fi
 
