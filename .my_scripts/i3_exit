@@ -6,7 +6,7 @@ revert() {
 
 lock() {
     trap revert HUP INT TERM
-    xset +dpms dpms 0 0 10
+    xset +dpms dpms 0 0 20
     i3lock "$@"
     revert
 }
