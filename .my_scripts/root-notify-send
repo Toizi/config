@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -z "$WAYLAND_DISPLAY" ]
+then
+# The following is not perfect but better than hardcoding the user display/completely
+#Detect the name of the display in use
+display=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | head -n 1)"
+
+#Detect the user using such display
+user="$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)"
+
+#Detect the id of the user
+uid=$(id -u $user)
+
+sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send "$@"
+else
+# on wayland it just works :)
+notify-send "$@"
+fi
+

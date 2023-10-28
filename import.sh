@@ -18,11 +18,11 @@ cp ~/.zprofile .
 cp ~/.bashrc .
 cp ~/.profile .
 cp ~/.tmux.conf .
-cp /etc/evremap.toml .
+cp /etc/resticprofile/template.toml ./resticprofile_template.toml
 cp -r ~/.config/terminator .
 cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/helix/config.toml helix.toml
-cp -r ~/.my_scripts .
+rsync -ra ~/.my_scripts .
 cp ~/.config/Code/User/keybindings.json ~/.config/Code/User/settings.json ./Code/User/
 # code --list-extensions > vscode_extensions.txt
 

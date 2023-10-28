@@ -1,0 +1,128 @@
+
+[global]
+  # ionice is available on Linux only
+  ionice = false
+  ionice-class = 2
+  ionice-level = 6
+  # priority is using priority class on windows, and "nice" on unixes
+  priority = "low"
+  # run 'snapshots' when no command is specified when invoking resticprofile
+  default-command = "status"
+  # initialize a repository if none exist at location
+  initialize = false
+  # resticprofile won't start a profile if there's less than 100MB of RAM available
+  min-memory = 100
+
+
+[shared_full]
+  # you can use a relative path, it will be relative to the configuration file
+  password-command = "echo '{{ $PASSWORD }}'"
+  initialize = false
+  lock = "/tmp/resticprofile-{{ .Profile.Name }}-{{ $NAME }}.lock"
+
+  [shared_full.backup]
+    source = [
+      "/",
+      "/home",
+      "/var/cache/pacman/pkg",
+      "/data",
+    ]
+    # https://restic.readthedocs.io/en/stable/040_backup.html?highlight=exclude#excluding-files
+    exclude = [
+      ".cache",
+      "node_modules",
+      "/swap/swapfile",
+      "/home/mg/dev/linux",
+
+      ".mozilla/firefox/**/morgue",
+      "/home/*/.config/Slack/Cache",
+      "/var/lib/docker",
+      "/home/mg/VirtualBox VMs/**/Snapshots",
+    ]
+    exclude-caches = true
+    one-file-system = true
+    tag = [ "{{ $NAME }}", "full" ]
+    # ignore restic warnings when files cannot be read
+    no-error-on-warning = true
+    # run every day at 8am
+    schedule = "*-*-* 08:00:00"
+    schedule-permission = "system"
+    schedule-lock-wait = "2h"
+    run-after-fail = [
+      '/usr/local/bin/root-notify-send --urgency=critical "{{ $NAME }} $PROFILE_NAME $PROFILE_COMMAND failed" "$ERROR_MESSAGE"',
+      # (priority 1-10, title, message)
+      'notify-gotify 5 "{{ $NAME }} $PROFILE_NAME $PROFILE_COMMAND failed" "$ERROR_MESSAGE"',
+    ]
+
+  [shared_full.prune]
+    # the first of every month
+    schedule = "*-*-01 12:00:00"
+    schedule-permission = "system"
+    schedule-lock-wait = "2h"
+    run-after-fail = [
+      '/usr/local/bin/root-notify-send --urgency=critical "$PROFILE_NAME $PROFILE_COMMAND failed: $ERROR_MESSAGE"',
+      # (priority 1-10, title, message)
+      'notify-gotify 5 "{{ $NAME }} $PROFILE_NAME $PROFILE_COMMAND failed" "$ERROR_MESSAGE"',
+    ]
+
+  # retention policy
+  # retention is a special section that run the "forget" command
+  # before or after a backup
+  [shared_full.retention]
+    before-backup = false
+    after-backup = true
+    keep-hourly = 1
+    keep-daily = 3
+    keep-weekly = 2
+    keep-monthly = 6
+    keep-within = "3h"
+    keep-tag = [ "forever" ]
+    prune = false
+    # tag can be a boolean ('true' meaning to copy tag set from 'backup') 
+    # or a custom set of tags.
+    # Default is 'false', meaning that tags are NOT used.
+    tag = true
+    # host can be a boolean ('true' meaning current hostname)
+    # or a string to specify a different hostname
+    host = true
+
+[rest]
+  inherit = "shared_full"
+  repository = "{{ $REST_URL }}"
+
+{{ $LOCAL_MOUNTPOINT := ""}}
+[local]
+  inherit = "shared_full"
+  repository = "local:/mnt/backup-{{ .Profile.Name }}-{{ $NAME }}/backup-restic-{{ $NAME }}"
+  run-before = [
+    "echo mounting /mnt/backup-{{ .Profile.Name }}-{{ $NAME }}",
+    "mkdir -p /mnt/backup-{{ .Profile.Name }}-{{ $NAME }}",
+    "mount /dev/disk/by-uuid/{{ $LOCAL_BACKUP_UUID }} /mnt/backup-{{ .Profile.Name }}-{{ $NAME }}"
+  ]
+  run-finally = [
+    "echo unmounting /mnt/backup-{{ .Profile.Name }}-{{ $NAME }}",
+    "umount /mnt/backup-{{ .Profile.Name }}-{{ $NAME }}"
+  ]
+
+
+# MUST BE DEFINED AT THE BOTTOM
+# since vars are also defined in comments :(
+# # define specialization.toml as follows
+# then use cat to combine them:
+#   cat specialization.toml template.toml > profiles.toml
+#
+# {{ $NAME := "REQUIRED" }}
+# {{ $PASSWORD := "REQUIRED" }}
+# {{ $LOCAL_BACKUP_UUID := "OPTIONAL" }}
+# {{ $REST_URL := "OPTIONAL" }}
+#
+# # Optionally override excludes, or just extend by leaving out 'exclude-file'
+# [shared_full.backup]
+#   exclude-file = ""
+#   exclude = []
+# if desktop notifications should be disabled, add the following overrides to settings
+# [shared_full.backup]
+#   run-after-fail = ""
+# [shared_full.prune]
+#   run-after-fail = ""
+

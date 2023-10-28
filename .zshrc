@@ -57,6 +57,9 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.profile
 
+for file in ~/.my_scripts/zsh_functions/*; do
+  source "$file"
+done
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -175,3 +178,4 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
+
