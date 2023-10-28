@@ -35,7 +35,7 @@ cp .profile ~
 cp .tmux.conf ~
 sudo mkdir -p /etc/resticprofile
 sudo chown "$USER:$USER" /etc/resticprofile
-cp ./resticprofile_template.toml /etc/resticprofile
+cp ./resticprofile_template.toml /etc/resticprofile/template.toml
 rsync -ra ./.my_scripts ~/
 sudo ln -s ~/.my_scripts/systemd-notify-failure /usr/local/bin
 sudo ln -s ~/.my_scripts/root-notify-send /usr/local/bin
