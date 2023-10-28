@@ -33,12 +33,18 @@ cp .zprofile ~
 cp .bashrc ~
 cp .profile ~
 cp .tmux.conf ~
+
+# resticprofile can be user-readable, only the config.toml must be root:root
 sudo mkdir -p /etc/resticprofile
 sudo chown "$USER:$USER" /etc/resticprofile
 cp ./resticprofile_template.toml /etc/resticprofile/template.toml
+
+# some scripts should be made available globally for use with systemd or other
+# root processes
 rsync -ra ./.my_scripts ~/
 sudo ln -s ~/.my_scripts/systemd-notify-failure /usr/local/bin
 sudo ln -s ~/.my_scripts/root-notify-send /usr/local/bin
+
 mkdir -p ~/.config/terminator
 rsync -ra ./terminator/ ~/.config/terminator/
 mkdir -p ~/.config/alacritty/
