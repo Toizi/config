@@ -116,11 +116,13 @@
 # {{ $LOCAL_BACKUP_UUID := "OPTIONAL" }}
 # {{ $REST_URL := "OPTIONAL" }}
 #
-# # Optionally override excludes, or just extend by leaving out 'exclude-file'
+# # Optionally override stuff by adding `include = [override.toml]`
+# # override.toml example:
+# version = "1"
+# # override excludes
 # [shared_full.backup]
-#   exclude-file = ""
 #   exclude = []
-# if desktop notifications should be disabled, add the following overrides to settings
+# if notifications should be disabled, add the following overrides to settings
 # [shared_full.backup]
 #   run-after-fail = ""
 # [shared_full.prune]
