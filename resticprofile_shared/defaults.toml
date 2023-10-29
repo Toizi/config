@@ -35,12 +35,16 @@ version = "1"
   ".cache",
   "node_modules",
   "/swap/swapfile",
+
+  # linux kernel
   "/home/mg/dev/linux",
 
   ".mozilla/firefox/**/morgue",
   "/home/*/.config/Slack/Cache",
   "/var/lib/docker",
-  "/home/mg/VirtualBox VMs/**/Snapshots",
+  "VirtualBox VMs/**/Snapshots",
+  # tob prebuilt libs
+  "cxx-common",
 `}}
 {{ $ADDITIONAL_EXCLUDES := "" }}
 

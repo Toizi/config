@@ -22,6 +22,8 @@
   initialize = false
   # resticprofile won't start a profile if there's less than 100MB of RAM available
   min-memory = 100
+  # locks older than this will be removed automatically
+  restic-stale-lock-age = "2h"
 
 
 [shared_full]
@@ -29,6 +31,8 @@
   password-command = "echo '{{ $PASSWORD }}'"
   initialize = false
   lock = "/tmp/resticprofile-{{ .Profile.Name }}-{{ $NAME }}.lock"
+  # remove stale locks
+  force-inactive-lock = true
 
   [shared_full.env]
     RP_NAME = "{{ $NAME }}"
@@ -80,7 +84,6 @@
     keep-daily = 3
     keep-weekly = 2
     keep-monthly = 6
-    keep-within = "3h"
     keep-tag = [ "forever" ]
     prune = false
     # tag can be a boolean ('true' meaning to copy tag set from 'backup')
