@@ -66,7 +66,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # use rofi instead of dmenu_run
-bindsym $mod+o exec --no-startup-id rofi -combi-modi window#drun -show combi -modes combi -theme paper-float -monitor -1
+bindsym $mod+o exec --no-startup-id rofi -combi-modi drun -show combi -modes combi -theme paper-float -monitor -1
 
 # change focus
 bindsym $mod+h focus left
