@@ -30,6 +30,12 @@ COLOR_DOWN=${COLOR_DOWN:-#FF0000}
 # connection (think desktop), the corresponding block should not be displayed.
 [[ ! -d /sys/class/net/${INTERFACE}/wireless ]] && exit
 
+# check if ethernet is up instead and don't display wifi in that case
+IF="${IF:-$(ip route | awk '/^default/ { print $5 ; exit }')}"
+if [[ "$IF" == "en"* ]] && [[ "$(cat /sys/class/net/$IF/operstate)" = 'up' ]]; then
+  exit
+fi
+
 # If the wifi interface exists but no connection is active, "down" shall be displayed.
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
     echo "down"
