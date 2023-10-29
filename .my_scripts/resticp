@@ -13,8 +13,14 @@ fi
 PROFILE_NAME="${1}"
 shift
 
-# always update resticprofile config
-sudo zsh -c "cat /etc/resticprofile/config.toml /etc/resticprofile/template.toml > /etc/resticprofile/profiles.toml"
+# always update resticprofile config and make sure they have the correct permissions
+sudo zsh -c "cat /etc/resticprofile/shared/defaults.toml \
+                 /etc/resticprofile/config.toml \
+                 /etc/resticprofile/shared/template.toml \
+              > /etc/resticprofile/profiles.toml ; \
+             chmod 400 /etc/resticprofile/profiles.toml ; \
+             chown root:root /etc/resticprofile/config.toml ; \
+             chmod 600 /etc/resticprofile/config.toml"
 
 # call resticprofile with the remaining args
-sudo resticprofile --name "${PROFILE_NAME}" $@
+sudo resticprofile --config /etc/resticprofile/profiles.toml --name "${PROFILE_NAME}" $@

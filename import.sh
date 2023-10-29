@@ -19,7 +19,7 @@ cp ~/.zprofile .
 cp ~/.bashrc .
 cp ~/.profile .
 cp ~/.tmux.conf .
-cp /etc/resticprofile/template.toml ./resticprofile_template.toml
+rsync -ra /etc/resticprofile/shared/ ./resticprofile_shared
 cp -r ~/.config/terminator .
 cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/helix/config.toml helix.toml

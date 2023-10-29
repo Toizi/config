@@ -35,9 +35,9 @@ cp .profile ~
 cp .tmux.conf ~
 
 # resticprofile can be user-readable, only the config.toml must be root:root
-sudo mkdir -p /etc/resticprofile
-sudo chown "$USER:$USER" /etc/resticprofile
-cp ./resticprofile_template.toml /etc/resticprofile/template.toml
+sudo mkdir -p /etc/resticprofile/shared
+sudo chown "$USER:$USER" /etc/resticprofile /etc/resticprofile/shared
+rsync -ra ./resticprofile_shared/ /etc/resticprofile/shared/
 
 # some scripts should be made available globally for use with systemd or other
 # root processes

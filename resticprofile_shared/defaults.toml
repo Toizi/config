@@ -1,0 +1,46 @@
+version = "1"
+
+# copy variable declarations that should be overridden to `../config.toml`
+# set true/false for `*_ENABLED` for enabling/disabling features
+# use `resticp` wrapper to stitch together and call the profile
+{{ $NAME := "" }}
+{{ $PASSWORD := "" }}
+
+# local target config
+{{ $LOCAL_BACKUP_UUID := "OPTIONAL" }}
+
+# rest config
+{{ $REST_URL := "OPTIONAL" }}
+
+# ssh config
+{{ $SSH_URL := "OPTIONAL" }}
+{{ $SSH_WAKE_ENABLED := "false" }}
+
+# notifications
+{{ $NOTIFY_ENABLED := "false" }}
+{{ $GOTIFY_ENABLED := "false" }}
+
+
+# backup sources
+{{ $DEFAULT_SOURCES := `
+  "/",
+  "/home",
+  "/var/cache/pacman/pkg",
+  "/data",
+`}}
+{{ $ADDITIONAL_SOURCES := "" }}
+
+# default exclude patterns
+{{ $DEFAULT_EXCLUDES := `
+  ".cache",
+  "node_modules",
+  "/swap/swapfile",
+  "/home/mg/dev/linux",
+
+  ".mozilla/firefox/**/morgue",
+  "/home/*/.config/Slack/Cache",
+  "/var/lib/docker",
+  "/home/mg/VirtualBox VMs/**/Snapshots",
+`}}
+{{ $ADDITIONAL_EXCLUDES := "" }}
+
