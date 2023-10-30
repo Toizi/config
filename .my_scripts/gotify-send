@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# send via gotify
+/usr/bin/curl \
+  --no-progress-meter \
+  "$(cat /data/secrets/gotify_url)" \
+  -F "priority=$1" \
+  -F "title=$2" \
+  -F "message=$3"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# check if we failed
+# https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+if [ "$SERVICE_RESULT" = "success" ] && [ "$EXIT_CODE" = "exited" ];
+then
+	exit 0
+fi
+
+# send via gotify
+/usr/local/bin/gotify-send "$1" "$2" "$3
+exit code: ${EXIT_STATUS}"

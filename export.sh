@@ -42,8 +42,16 @@ rsync -ra ./resticprofile_shared/ /etc/resticprofile/shared/
 # some scripts should be made available globally for use with systemd or other
 # root processes
 rsync -ra ./.my_scripts ~/
-sudo ln -s ~/.my_scripts/systemd-notify-failure /usr/local/bin
-sudo ln -s ~/.my_scripts/root-notify-send /usr/local/bin
+sudo ln -sf ~/.my_scripts/systemd-notify-failure /usr/local/bin
+sudo ln -sf ~/.my_scripts/root-notify-send /usr/local/bin
+sudo ln -sf ~/.my_scripts/systemd-gotify-failure /usr/local/bin
+sudo ln -sf ~/.my_scripts/gotify-send /usr/local/bin
+
+# setup secrets directory in case it does not exist
+if [[ -d "/data" && ! -d "/data/secrets" ]]; then
+  echo "created /data/secrets/, make sure to populate secrets as needed"
+  sudo mkdir -p /data/secrets
+fi
 
 mkdir -p ~/.config/terminator
 rsync -ra ./terminator/ ~/.config/terminator/

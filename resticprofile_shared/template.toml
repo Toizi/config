@@ -3,7 +3,7 @@
   '${RP_NOTIFY_ENABLED} && /usr/local/bin/root-notify-send --urgency=critical \"$PROFILE_NAME $PROFILE_COMMAND failed\" \"$ERROR_MESSAGE\"',
   {{end}}
 {{define "GOTIFY_NOTIFICATIONS_CMD" }}
-  '${RP_GOTIFY_ENABLED} && notify-gotify 5 \" $RP_NAME $PROFILE_NAME $PROFILE_COMMAND failed\" \"$ERROR_MESSAGE\"',
+  '${RP_GOTIFY_ENABLED} && /usr/local/bin/gotify-send 5 \" $RP_NAME $PROFILE_NAME $PROFILE_COMMAND failed\" \"$ERROR_MESSAGE\"',
 {{end}}
 {{define "SSH_WAKE_CMD" }}
   '${RP_SSH_WAKE_ENABLED} && {{ .ConfigDir }}/shared/ssh_wakeup.sh }}',
