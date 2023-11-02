@@ -35,17 +35,27 @@ cp .profile ~
 cp .tmux.conf ~
 
 # resticprofile can be user-readable, only the config.toml must be root:root
-sudo mkdir -p /etc/resticprofile/shared
-sudo chown "$USER:$USER" /etc/resticprofile /etc/resticprofile/shared
+if [[ ! -d "/etc/resticprofile/shared" ]]; then
+  sudo mkdir -p /etc/resticprofile/shared
+  sudo chown "$USER:$USER" /etc/resticprofile /etc/resticprofile/shared
+fi
 rsync -ra ./resticprofile_shared/ /etc/resticprofile/shared/
+
+if [[ ! -d "/etc/keyd" ]]; then
+  sudo mkdir -p /etc/keyd/
+  sudo chown "$USER:$USER" /etc/keyd
+fi
+cp ./keyd.conf /etc/keyd/default.conf
 
 # some scripts should be made available globally for use with systemd or other
 # root processes
 rsync -ra ./.my_scripts ~/
-sudo ln -sf ~/.my_scripts/systemd-notify-failure /usr/local/bin
-sudo ln -sf ~/.my_scripts/root-notify-send /usr/local/bin
-sudo ln -sf ~/.my_scripts/systemd-gotify-failure /usr/local/bin
-sudo ln -sf ~/.my_scripts/gotify-send /usr/local/bin
+for SCRIPT in systemd-notify-failure root-notify-send systemd-gotify-failure gotify-send
+do
+  if [[ ! -f "/usr/local/bin/${SCRIPT}" ]]; then
+    sudo ln -s "~/.my_scripts/${SCRIPT}" /usr/local/bin
+  fi
+done
 
 # setup secrets directory in case it does not exist
 if [[ -d "/data" && ! -d "/data/secrets" ]]; then

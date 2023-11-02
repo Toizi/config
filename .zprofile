@@ -1,10 +1,6 @@
 export PATH="/home/mg/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="/home/mg/.foundry/bin:$PATH"
 
-# keep using x for now since it has way fewer problems
-if command -v startx > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx
-fi
 if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   # fixes invisible cursor
   export WLR_NO_HARDWARE_CURSORS=1
@@ -20,9 +16,17 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   export XDG_CURRENT_DESKTOP=sway
   export XDG_SESSION_DESKTOP=sway
 
+  # a fix for xwayland apps turning black
+  export XWAYLAND_NO_GLAMOR=1
+
   # app specific settings
   export MOZ_ENABLE_WAYLAND=1
 
   # allow keepass to populate ssh keys via agent
   exec ssh-agent sway --unsupported-gpu > /tmp/sway.log 2>&1
+fi
+
+# fallback to x
+if command -v startx > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
 fi

@@ -20,6 +20,7 @@ cp ~/.bashrc .
 cp ~/.profile .
 cp ~/.tmux.conf .
 rsync -ra /etc/resticprofile/shared/ ./resticprofile_shared
+cp /etc/keyd/default.conf ./keyd.conf
 cp -r ~/.config/terminator .
 cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/helix/config.toml helix.toml
