@@ -53,7 +53,7 @@ rsync -ra ./.my_scripts ~/
 for SCRIPT in systemd-notify-failure root-notify-send systemd-gotify-failure gotify-send
 do
   if [[ ! -f "/usr/local/bin/${SCRIPT}" ]]; then
-    sudo ln -s "~/.my_scripts/${SCRIPT}" /usr/local/bin
+    sudo ln -s "$HOME/.my_scripts/${SCRIPT}" /usr/local/bin
   fi
 done
 
