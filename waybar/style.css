@@ -160,6 +160,7 @@ label:focus {
 }
 
 #network {
+    min-width: 200px;
     background-color: #2980b9;
 }
 
