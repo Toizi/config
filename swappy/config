@@ -1,0 +1,4 @@
+[Default]
+save_dir=$HOME/screenshots
+# exit swappy when pressing ctrl+c/s to save file or copy to clipboard
+early_exit=true

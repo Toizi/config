@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if [[ "$1" = "select_window" ]]; then
+  grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
+elif [[ "$1" = "select_area" ]]; then
+  grim -g "$(slurp)" - | swappy -f -
+fi

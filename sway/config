@@ -1,10 +1,7 @@
 # Read `man 5 sway` for a complete reference.
 
 # TODO:
-# - fix evremap not working when tapping shift+space
-# - figure out screenshotting, flameshot doesn't seem to work for whatever reason
 # - find replacement for redshift that works with nvidia gpu
-# - check out how to run spotify (needs XWayland maybe?)
 
 # use win key as mod
 set $mod Mod4
@@ -239,9 +236,17 @@ mode "$mode_display" {
 }
 bindsym $mod+Control+d mode "$mode_display"
 
-# take screenshot and save it in clipboard
-# TODO: currently broken
-bindsym $mod+Control+s exec --no-startup-id /usr/bin/flameshot gui
+# mode for taking screenshots
+set $mode_screenshot Take screenshot of (w)indow, (a)rea
+mode "$mode_screenshot" {
+    bindsym w exec --no-startup-id ~/.my_scripts/sway_screenshot select_window, mode "default"
+    bindsym a exec --no-startup-id ~/.my_scripts/sway_screenshot select_area, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Control+s mode "$mode_screenshot"
 
 # auto lock screen after 3 minutes and turn off screen after 25s if locked.
 # need to specify timeout for turning off screen twice since the entry for 25

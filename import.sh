@@ -7,6 +7,7 @@ cp -r ~/.config/gammastep .
 cp -r ~/.config/i3 .
 cp -r ~/.config/i3blocks .
 cp -r ~/.config/redshift .
+cp -r ~/.config/swappy .
 cp ~/.config/picom/picom.conf .
 cp ~/.radare2rc .
 cp ~/.config/git/config .gitconfig

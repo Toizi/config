@@ -17,6 +17,8 @@ mkdir -p ~/.config/i3blocks/
 rsync -ra ./i3blocks/ ~/.config/i3blocks
 mkdir -p ~/.config/redshift
 rsync -ra ./redshift/ ~/.config/redshift
+mkdir -p ~/.config/swappy
+rsync -ra ./swappy/ ~/.config/swappy
 mkdir -p ~/.config/picom
 cp picom.conf ~/.config/picom/
 mkdir -p ~/.config/helix
