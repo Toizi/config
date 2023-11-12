@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [[ "$(cat /sys/class/net/wg0/operstate)" = 'down' ]]; then
+  echo '{"text":"Disconnected","class":"disconnected","percentage":0}'
+else
+  echo '{"text":"Connected","class":"connected","percentage":100}'
+fi
+
