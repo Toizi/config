@@ -1,8 +1,5 @@
 # Read `man 5 sway` for a complete reference.
 
-# TODO:
-# - find replacement for redshift that works with nvidia gpu
-
 # use win key as mod
 set $mod Mod4
 
