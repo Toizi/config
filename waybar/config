@@ -129,7 +129,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) {bandwidthDownBytes}   {bandwidthUpBytes} ",
+        "format-wifi": "  {essid} ({signalStrength}%) {bandwidthDownBytes}   {bandwidthUpBytes} ",
         "format-ethernet": " {bandwidthDownBytes}   {bandwidthUpBytes} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
