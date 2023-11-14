@@ -43,7 +43,7 @@ if [[ ! -d "/etc/resticprofile/shared" ]]; then
 fi
 rsync -ra ./resticprofile_shared/ /etc/resticprofile/shared/
 
-if [[ ! -d "/etc/keyd" ]]; then
+if [[ ! -d "/etc/keyd" || $(stat -c "%U" "/etc/keyd") != "$USER" ]]; then
   sudo mkdir -p /etc/keyd/
   sudo chown "$USER:$USER" /etc/keyd
 fi
