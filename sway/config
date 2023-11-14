@@ -124,7 +124,8 @@ assign [app_id="Google-chrome"] $ws7
 # assign is broken for spotify for some reason
 for_window [app_id="Spotify"] move to workspace $ws7
 assign [app_id="zoom "] $ws8
-assign [app_id="Slack|Signal|thunderbird"] $ws9
+assign [app_id="Signal|thunderbird"] $ws9
+assign [class="Slack"] $ws9
 for_window [app_id="Slack|Signal|thunderbird"] layout tabbed
 assign [app_id="firefox"] $ws10
 
