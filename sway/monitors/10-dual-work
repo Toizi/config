@@ -1,11 +1,13 @@
 #!/bin/sh
 
+MON_INTERNAL="eDP-1"
 MON_LEFT="ViewSonic Corporation VX2758-Series VVF201800102"
-MON_RIGHT="ViewSonic Corporation VX2758-Series VVF190100000"
+MON_RIGHT="ViewSonic Corporation VX2758-Series VVF201800199"
 
 if (swaymsg -t get_outputs --pretty | grep "$MON_LEFT") && (swaymsg -t get_outputs --pretty | grep "$MON_RIGHT"); then
     swaymsg -- "output \"$MON_LEFT\" pos 0 0"
     swaymsg -- "output \"$MON_RIGHT\" pos 2560 0"
+    swaymsg -- "output \"$MON_INTERNAL\" disable"
 
     swaymsg -- "workspace 1 output \"$MON_RIGHT\" \"$MON_LEFT\""
     swaymsg -- "workspace 2 output \"$MON_RIGHT\" \"$MON_LEFT\""
