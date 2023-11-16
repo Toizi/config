@@ -89,7 +89,7 @@
         "min-length": 6,
     },
     "memory": {
-        "format": "  {used:0.1f}GiB ({percentage}%)",
+        "format": " {used:0.1f}GiB ({percentage}%)",
         "min-length": 14,
         "tooltip-format": "Memory {used}GiB/{total}GiB | Swap {swapUsed}GiB/{swapTotal}GiB",
     },

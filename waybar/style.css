@@ -4,12 +4,10 @@
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 15px;
     min-height: 0;
-    /* margin-left: 4px; */
-    /* margin-right: 4px; */
 }
 
 window#waybar {
-    background: rgba(43, 48, 59, 0.5);
+    background: rgba(70, 70, 70, 0.5);
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     color: white;
 }
