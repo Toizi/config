@@ -32,8 +32,12 @@ tooltip label {
     border-bottom: 3px solid white;
 }
 
-#mode, #clock, #battery {
+#mode, #clock, #battery, #pulseaudio, #temperature, #language, #backlight,
+#idle_inhibitor, #tray, #cpu, #memory, #disk {
     padding: 0 10px;
+}
+#network.name {
+    padding-left: 10px;
 }
 
 #mode {
@@ -65,10 +69,5 @@ tooltip label {
 #battery.warning:not(.charging) {
     background: #f53c3c;
     color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
