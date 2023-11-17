@@ -4,10 +4,10 @@ MON_1="HDMI-A-1"
 MON_2="eDP-1"
 
 if (swaymsg -t get_outputs --pretty | grep "$MON_2") && (swaymsg -t get_outputs --pretty | grep "$MON_1"); then
-    swaymsg -- "output \"$MON_2\" pos 0 0"
+    swaymsg -- "output \"$MON_2\" pos 0 0 enable"
     # position the monitor far enough below the HDMI one to not allow mouse
     # travel between the two accidentally
-    swaymsg -- "output \"$MON_1\" pos 0 3000"
+    swaymsg -- "output \"$MON_1\" pos 0 3000 enable"
     # enable mouse warping to have mouse active on the current monitor since
     # it's no longer possible to move it manually
     swaymsg -- "mouse_warping output"

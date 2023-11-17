@@ -229,8 +229,8 @@ bindsym $mod+Control+b mode "$mode_bluetooth"
 # mode for switching displays
 set $mode_display Switch display to (e) external, (i) internal
 mode "$mode_display" {
-    bindsym e exec --no-startup-id ~/.my_scripts/sway_external_display, mode "default"
-    bindsym i exec --no-startup-id ~/.my_scripts/sway_internal_display, mode "default"
+    bindsym e exec --no-startup-id ~/.my_scripts/sway_default_monitor, mode "default"
+    bindsym i exec --no-startup-id ~/.my_scripts/sway_internal_monitor, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"

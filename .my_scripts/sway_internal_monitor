@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for output in $(swaymsg -t get_outputs | jq -r ".[].name")
+do
+  if [[ "$output" != "eDP-1" ]] ; then
+    swaymsg -- "output \"$output\" disable"
+  fi
+done
