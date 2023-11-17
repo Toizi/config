@@ -12,6 +12,10 @@ input type:pointer {
     pointer_accel -0.2
 }
 
+input type:touchpad {
+    natural_scroll enabled
+}
+
 # Font for window titles
 font FontAwesome:monospace 12
 
