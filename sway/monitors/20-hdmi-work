@@ -1,0 +1,37 @@
+#!/bin/sh
+
+MON_1="HDMI-A-1"
+MON_2="eDP-1"
+
+if (swaymsg -t get_outputs --pretty | grep "$MON_2") && (swaymsg -t get_outputs --pretty | grep "$MON_1"); then
+    swaymsg -- "output \"$MON_2\" pos 0 0"
+    # position the monitor far enough below the HDMI one to not allow mouse
+    # travel between the two accidentally
+    swaymsg -- "output \"$MON_1\" pos 0 3000"
+    # enable mouse warping to have mouse active on the current monitor since
+    # it's no longer possible to move it manually
+    swaymsg -- "mouse_warping output"
+
+    swaymsg -- "workspace 1 output \"$MON_1\" \"$MON_2\""
+    swaymsg -- "workspace 2 output \"$MON_1\" \"$MON_2\""
+    swaymsg -- "workspace 3 output \"$MON_1\" \"$MON_2\""
+    swaymsg -- "workspace 4 output \"$MON_1\" \"$MON_2\""
+    swaymsg -- "workspace 5 output \"$MON_1\" \"$MON_2\""
+
+    swaymsg -- "workspace 6 output \"$MON_2\" \"$MON_1\""
+    swaymsg -- "workspace 7 output \"$MON_2\" \"$MON_1\""
+    swaymsg -- "workspace 8 output \"$MON_2\" \"$MON_1\""
+    swaymsg -- "workspace 9 output \"$MON_2\" \"$MON_1\""
+    swaymsg -- "workspace 10 output \"$MON_2\" \"$MON_1\""
+
+    # save focused and visible workspace
+    FOCUSED=$(swaymsg -t get_workspaces | jq ".[] | select(.focused == true).num")
+    VISIBLE=$(swaymsg -t get_workspaces | jq ".[] | select(.visible == true and .focused == false).num")
+
+    # free up workspace 1 and 2 to make sure they are assigned to the expected output
+    # then switch back to the focused and visible workspace in case this is a hot reload
+    swaymsg -- "workspace 1 ; workspace 6 ; workspace 2 ; workspace 1 ; workspace $VISIBLE ; workspace $FOCUSED"
+else
+    echo "Did not recognize home environment (monitors $MON_2 and $MON_1)"
+    exit 1
+fi
