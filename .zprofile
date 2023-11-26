@@ -23,7 +23,7 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   export MOZ_ENABLE_WAYLAND=1
 
   # allow keepass to populate ssh keys via agent
-  exec ssh-agent sway --unsupported-gpu > /tmp/sway.log 2>&1
+  exec ssh-agent systemd-cat --identifier=sway sway --unsupported-gpu
 fi
 
 # fallback to x
