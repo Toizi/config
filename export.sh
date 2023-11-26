@@ -35,6 +35,7 @@ cp .zprofile ~
 cp .bashrc ~
 cp .profile ~
 cp .tmux.conf ~
+cp ./sway-session.target ~/.config/systemd/user/
 
 # resticprofile can be user-readable, only the config.toml must be root:root
 if [[ ! -d "/etc/resticprofile/shared" ]]; then
