@@ -92,6 +92,9 @@ export GHIDRA_PATH=/opt/ghidra
 # local bin path
 export PATH=$PATH:~/bin
 
+# add go binaries to path
+command -v go > /dev/null && export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+
 # set custom nvim path for using dev version
 # export VIMRUNTIME=~/tools/nvim-linux64/share/nvim/runtime/
 
@@ -179,3 +182,15 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
+# customize the **<tab> command
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    # default case needs to be here
+    *)            fzf "$@" ;;
+  esac
+}
