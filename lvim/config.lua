@@ -160,6 +160,7 @@ lvim.builtin.telescope.defaults.mappings.i["<esc>"] = actions.close
 -- Open references in telescope instead of the quickfix window
 -- show_line only shows the filename and not the match since we always have a preview anyway
 lvim.lsp.buffer_mappings.normal_mode["gr"] = { ":lua require('telescope.builtin').lsp_references({show_line=false})<cr>", "References (telescope)" }
+lvim.lsp.buffer_mappings.normal_mode["gi"] = { ":lua require('telescope.builtin').lsp_implementations({show_line=false})<cr>", "References (telescope)" }
 lvim.lsp.buffer_mappings.normal_mode["gR"] = { vim.lsp.buf.references, "References (Quick fix)" }
 
 -- Quick access to search through open buffers
