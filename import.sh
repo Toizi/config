@@ -23,7 +23,7 @@ cp ~/.tmux.conf .
 rsync -ra /etc/resticprofile/shared/ ./resticprofile_shared
 cp /etc/keyd/default.conf ./keyd.conf
 cp -r ~/.config/terminator .
-cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
+cp ~/.config/alacritty/alacritty.toml ./alacritty.toml
 cp ~/.config/helix/config.toml helix.toml
 cp ~/.config/systemd/user/sway-session.target .
 rsync -ra ~/.my_scripts .
