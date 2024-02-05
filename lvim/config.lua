@@ -166,6 +166,10 @@ lvim.lsp.buffer_mappings.normal_mode["gR"] = { vim.lsp.buf.references, "Referenc
 -- Quick access to search through open buffers
 lvim.builtin.which_key.mappings["o"] = { "<cmd>Telescope buffers initial_mode=insert previewer=false theme=dropdown<cr>", "Find buffer" }
 
+-- Diffview shortcuts
+lvim.builtin.which_key.mappings["g"]["h"] = { "<cmd>DiffviewFileHistory %<cr>", "Diff view current file history" }
+lvim.builtin.which_key.mappings["g"]["q"] = { "<cmd>DiffviewClose<cr>", "Diff view close" }
+
 -- Show suggestions for folding
 lvim.builtin.which_key.setup.plugins.presets.z = true
 vim.opt.foldmethod = "expr" -- default is "normal"
@@ -230,41 +234,9 @@ lvim.autocommands = {
 -- setup rust
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 lvim.plugins = {
-  -- contains both dark and light theme depending on the surroundings
-  -- use `set background=light` to active light theme
-  { "mg979/vim-studio-dark" },
-  {
-    "Shatur/neovim-ayu",
-    config = function()
-      -- change background colors of git diff to make it more readable on light
-      -- theme
-      require("ayu").setup({
-        overrides = function()
-          if vim.o.background == 'light' then
-            return
-            {
-              -- DiffAdd = { fg = '#99BF4D', bg = '#E0E7CD'},
-              -- DiffChange = { fg = '#709ECC' },
-              -- DiffText = { fg = '#F27983', bg = '#F9EBE4'},
-              --
-              DiffAdd = { bg = '#f2ffe6' },
-              DiffChange = { bg = '#F1FDFF' },
-              DiffText = { bg = '#E4FCFF' },
-            }
-          end
-          return {}
-        end
-      })
-    end,
-  },
-  {
-    "Mofiqul/vscode.nvim",
-    -- require("vscode").setup({
-
-    -- })
-  },
+  { "Mofiqul/vscode.nvim", },
+  { "sindrets/diffview.nvim", },
   { "tpope/vim-sleuth" },
-  { "christoomey/vim-tmux-navigator" },
   {
     "simrat39/rust-tools.nvim",
     ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
