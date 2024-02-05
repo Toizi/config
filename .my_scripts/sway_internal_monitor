@@ -6,3 +6,4 @@ do
     swaymsg -- "output \"$output\" disable"
   fi
 done
+swaymsg -- "output eDP-1 enable"
