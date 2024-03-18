@@ -97,6 +97,8 @@
 [rest]
   inherit = "shared_full"
   repository = "{{ $REST_URL }}"
+  [rest.backup]
+    schedule-after-network-online = true
 
 [ssh]
   inherit = "shared_full"
@@ -104,6 +106,8 @@
   run-before = [
     {{ template "SSH_WAKE_CMD" . }}
   ]
+  [ssh.backup]
+    schedule-after-network-online = true
 
 [local]
   inherit = "shared_full"
