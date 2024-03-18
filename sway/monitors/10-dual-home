@@ -1,9 +1,11 @@
 #!/bin/sh
 
-MON_LEFT="ViewSonic Corporation VX2758-Series VVF201800102"
-MON_RIGHT="ViewSonic Corporation VX2758-Series VVF190100000"
-
-if (swaymsg -t get_outputs --pretty | grep "$MON_LEFT") && (swaymsg -t get_outputs --pretty | grep "$MON_RIGHT"); then
+# both monitors use the name/serial if connected via DP
+MON_NAME="ViewSonic Corporation VX2758-Series VVF190100000"
+MON_LEFT="DP-1"
+MON_RIGHT="DP-2"
+MON_COUNT=$(swaymsg -t get_outputs --pretty | grep "$MON_NAME" | wc --lines)
+if [ "$MON_COUNT" -gt "1" ]; then
     swaymsg -- "output \"$MON_LEFT\" pos 0 0"
     swaymsg -- "output \"$MON_RIGHT\" pos 2560 0"
 
@@ -27,6 +29,6 @@ if (swaymsg -t get_outputs --pretty | grep "$MON_LEFT") && (swaymsg -t get_outpu
     # then switch back to the focused and visible workspace in case this is a hot reload
     swaymsg -- "workspace 1 ; workspace 6 ; workspace 2 ; workspace 1 ; workspace $VISIBLE ; workspace $FOCUSED"
 else
-    echo "Did not recognize home environment (monitors $MON_LEFT and $MON_RIGHT)"
+    echo "Did not recognize home environment (monitors $MON_LEFT and $MON_RIGHT with name $MON_NAME)"
     exit 1
 fi
