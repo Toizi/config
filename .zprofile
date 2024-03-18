@@ -3,10 +3,10 @@ export PATH="/home/mg/.foundry/bin:$PATH"
 
 if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   # fixes invisible cursor
-  export WLR_NO_HARDWARE_CURSORS=1
+  # export WLR_NO_HARDWARE_CURSORS=1
 
   # unsure if this is strictly better than the default
-  export WLR_RENDERER=vulkan
+  # export WLR_RENDERER=vulkan
 
   # recommended settings by flameshot
   # https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
@@ -23,7 +23,7 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   export MOZ_ENABLE_WAYLAND=1
 
   # allow keepass to populate ssh keys via agent
-  exec ssh-agent systemd-cat --identifier=sway sway --unsupported-gpu
+  exec ssh-agent systemd-cat --identifier=sway sway
 fi
 
 # fallback to x
