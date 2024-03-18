@@ -45,6 +45,10 @@ version = "1"
   "VirtualBox VMs/**/Snapshots",
   # tob prebuilt libs
   "cxx-common",
+  # android sdk stuff
+  "/home/mg/Android",
+  # steam games
+  "/home/mg/.local/share/Steam/steamapps/common",
 `}}
 {{ $ADDITIONAL_EXCLUDES := "" }}
 
