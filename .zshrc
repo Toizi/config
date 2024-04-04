@@ -123,16 +123,7 @@ help() {
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
 alias vim="lvim"
-if [ -z "$WAYLAND_DISPLAY" ]
-then
-alias setclip="xclip -selection c"
-alias getclip="xclip -selection c -o"
-alias wmconfig="$EDITOR ~/.config/i3/config"
-else
-alias setclip=wl-copy
-alias getclip=wl-paste
-alias wmconfig="$EDITOR ~/.config/sway/config"
-fi
+
 alias vimconfig="$EDITOR ~/.config/nvim/"
 alias cat="bat"
 alias sudovim="sudo -E -s lvim"
@@ -140,6 +131,19 @@ alias hx="helix"
 alias rg="rg --colors 'path:fg:yellow'"
 alias sd="systemctl" # systemd
 alias ssd="sudo -s -E systemctl" # sudo systemd
+alias ls=eza
+
+if [ -z "$WAYLAND_DISPLAY" ]
+then
+  alias setclip="xclip -selection c"
+  alias getclip="xclip -selection c -o"
+  alias wmconfig="$EDITOR ~/.config/i3/config"
+else
+  alias setclip=wl-copy
+  alias getclip=wl-paste
+  alias wmconfig="$EDITOR ~/.config/sway/config"
+fi
+
 
 export sysd="/etc/systemd/system/"
 
