@@ -69,7 +69,7 @@ done
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='lvim'
+   export EDITOR='nvim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -122,11 +122,11 @@ help() {
 
 alias python="python3"
 alias cdshr="cd /media/sf_readwrite"
-alias vim="lvim"
+alias vim="nvim"
 
-alias vimconfig="$EDITOR ~/.config/nvim/"
+alias vimconfig="pushd ~/.config/nvim; $EDITOR .; popd"
 alias cat="bat"
-alias sudovim="sudo -E -s lvim"
+alias sudovim="sudo -E -s nvim"
 alias hx="helix"
 alias rg="rg --colors 'path:fg:yellow'"
 alias sd="systemctl" # systemd
@@ -146,6 +146,7 @@ fi
 
 
 export sysd="/etc/systemd/system/"
+setopt PUSHDSILENT
 
 grep -q "Microsoft" /proc/sys/kernel/osrelease
 ON_WSL=$?
