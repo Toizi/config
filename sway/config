@@ -127,11 +127,31 @@ assign [app_id="Google-chrome"] $ws7
 # assign [app_id="Spotify"] $ws7
 # assign is broken for spotify for some reason
 for_window [app_id="Spotify"] move to workspace $ws7
-assign [app_id="zoom "] $ws8
+assign [app_id="Zoom"] $ws8
 assign [app_id="Signal|thunderbird"] $ws9
 assign [class="Slack"] $ws9
 for_window [app_id="Slack|Signal|thunderbird"] layout tabbed
 assign [app_id="firefox"] $ws10
+
+# # For pop up notification windows that don't use notifications api
+# for_window [app_id="Zoom" title="^zoom$"] border none, floating enable
+# # For specific Zoom windows
+# for_window [app_id="Zoom" title="^(Zoom|About)$"] border pixel, floating enable
+# for_window [app_id="Zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
+# # Open Zoom Meeting windows on a new workspace (a bit hacky)
+# for_window [app_id="Zoom" title="Zoom Meeting(.*)?"] workspace next_on_output --create, move container to workspace current, floating disable, inhibit_idle open
+
+for_window {
+  [app_id="firefox"]        inhibit_idle fullscreen
+  [app_id="mpv"]            inhibit_idle focus
+  [app_id="Zoom"]        floating enable, inhibit_idle focus
+  # make settings dropdowns big enough
+  [app_id="Zoom" window_type="floating_con"] floating_minimum_size 600 x 700
+  [window_role="pop-up"] floating enable
+  [window_role="bubble"] floating enable
+  [window_role="dialog"] floating enable
+  [window_type="dialog"] floating enable
+}
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
