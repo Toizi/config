@@ -97,6 +97,7 @@
 [rest]
   inherit = "shared_full"
   repository = "{{ $REST_URL }}"
+  systemd-drop-in-files = ["shared/99-drop-in-check-dns.conf"]
   [rest.backup]
     schedule-after-network-online = true
 
