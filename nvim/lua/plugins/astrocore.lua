@@ -91,6 +91,10 @@ return {
           -- ["<esc>"] = false,
         },
       },
+      on_keys = {
+        -- disable losing search highlight when moving around
+        auto_hlsearch = false
+      }
     },
   },
   -- customize cmp mappings
