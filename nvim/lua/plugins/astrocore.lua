@@ -84,6 +84,13 @@ return {
           ["<Leader>y"] = {
             "\"+y",
             desc = "Copy to clipboard"
+          },
+          -- don't exit visual mode when adjusting indentation
+          [">"] = {
+            ">gv"
+          },
+          ["<"] = {
+            "<gv"
           }
         },
         t = {

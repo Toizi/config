@@ -78,8 +78,18 @@ return {
         },
         -- disable results in search window to make sure there is enough space for paths
         -- this unfortunately breaks references for small windows since the preview window won't be shown there
-        gr = { ":lua require('telescope.builtin').lsp_references({show_line=false})<cr>", desc = "References (telescope)" },
-        gI = { ":lua require('telescope.builtin').lsp_implementations({show_line=false})<cr>", desc = "Implementations (telescope)" },
+        gr = {
+          function()
+            require('telescope.builtin').lsp_references({show_line=false})
+          end,
+          desc = "References (telescope)"
+        },
+        gI = {
+          function()
+            require('telescope.builtin').lsp_implementations({show_line=false})
+          end,
+          desc = "Implementations (telescope)"
+        },
 
         -- ["<Leader>uY"] = {
         --   function() require("astrolsp.toggles").buffer_semantic_tokens() end,
