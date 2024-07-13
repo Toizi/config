@@ -76,3 +76,5 @@ rsync -ra Code/User/ ~/.config/Code/User/
 # echo "installing vscode extensions"
 # ./install_extensions.py
 
+# check if secrets are set on this system
+./check_secrets.sh
