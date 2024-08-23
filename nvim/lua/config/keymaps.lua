@@ -18,3 +18,17 @@ local map = vim.keymap.set
 -- vim.keymap.del("n", "<leader>l")
 
 map("v", "<leader>y", '"+y', { desc = "Copy to clipboard" })
+
+map(
+  "n",
+  "<leader>pr",
+  "<cmd>let @+ = expand('%:~:.')<cr>",
+  { desc = "Copy relative path" }
+)
+
+map(
+  "n",
+  "<leader>pp",
+  "<cmd>let @+ = expand('%')<cr>",
+  { desc = "Copy absolute path" }
+)
