@@ -8,3 +8,6 @@ local opt = vim.opt
 opt.relativenumber = false
 opt.clipboard = ""
 opt.background = "light"
+
+-- don't do any animations
+vim.g.snacks_animate = false

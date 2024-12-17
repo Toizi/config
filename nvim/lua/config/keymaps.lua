@@ -21,14 +21,14 @@ map("v", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 
 map(
   "n",
-  "<leader>pr",
+  "<leader>yP",
   "<cmd>let @+ = expand('%:~:.')<cr>",
   { desc = "Copy relative path" }
 )
 
 map(
   "n",
-  "<leader>pp",
+  "<leader>yp",
   "<cmd>let @+ = expand('%')<cr>",
   { desc = "Copy absolute path" }
 )

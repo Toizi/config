@@ -1,20 +1,14 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
+    ---@module 'blink.cmp'
+    ---@param opts blink.cmp.Config
     opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.mapping = vim.tbl_extend(
-        "force",
-        opts.mapping,
-        {
-          -- don't accept autocompletion via enter
-          ["<CR>"] = function(fallback) cmp.abort() fallback() end,
-          -- accept autocompletion via ctrl+l instead
-          ["<C-l>"] = cmp.mapping.confirm({ select = true }),
-        }
-      )
-      -- turn off ghost text
-      opts.experimental.ghost_text = nil
+      opts.completion.ghost_text.enabled = false
+      -- don't accept autocompletion via enter
+      opts.keymap['<CR>'] = {}
+      -- accept autocompletion via ctrl+l instead
+      opts.keymap['<C-l>'] = { 'accept', 'fallback' }
     end,
   },
 }
