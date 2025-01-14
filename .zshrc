@@ -55,6 +55,10 @@ plugins=(git docker)
 
 source $ZSH/oh-my-zsh.sh
 
+# unlimited history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
 source ~/.profile
 
 for file in ~/.my_scripts/zsh_functions/*; do
@@ -199,3 +203,4 @@ _fzf_comprun() {
     *)            fzf "$@" ;;
   esac
 }
+
