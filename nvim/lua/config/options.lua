@@ -9,5 +9,5 @@ opt.relativenumber = false
 opt.clipboard = ""
 opt.background = "light"
 
--- don't do any animations
+-- disable animations
 vim.g.snacks_animate = false
