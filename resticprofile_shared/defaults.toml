@@ -49,6 +49,8 @@ version = "1"
   "/home/mg/Android",
   # steam games
   "/home/mg/.local/share/Steam/steamapps/common",
+  # go deps/binaries
+  "/home/mg/go",
 `}}
 {{ $ADDITIONAL_EXCLUDES := "" }}
 
