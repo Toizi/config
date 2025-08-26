@@ -314,4 +314,4 @@ gaps outer -10
 # source default config stuff
 include /etc/sway/config.d/*
 
-exec "systemctl --user start sway-session.target"
+exec_always "systemctl --user start sway-session.target"
