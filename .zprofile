@@ -6,7 +6,7 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   # export WLR_NO_HARDWARE_CURSORS=1
 
   # unsure if this is strictly better than the default
-  export WLR_RENDERER=vulkan
+  # export WLR_RENDERER=vulkan
 
   # recommended settings by flameshot
   # https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
@@ -17,7 +17,7 @@ if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
   export XDG_SESSION_DESKTOP=sway
 
   # a fix for xwayland apps turning black
-  export XWAYLAND_NO_GLAMOR=1
+  # export XWAYLAND_NO_GLAMOR=1
 
   # app specific settings
   export MOZ_ENABLE_WAYLAND=1
