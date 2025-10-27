@@ -52,7 +52,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start wofi (a program launcher)
-bindsym $mod+o exec --no-startup-id wofi --show=drun --location=top_left
+bindsym $mod+o exec --no-startup-id wofi --insensitive --allow-images --allow-markup --show=drun --location=top_left
 
 # change focus
 bindsym $mod+h focus left
