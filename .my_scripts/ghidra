@@ -1,47 +1,168 @@
 #!/usr/bin/env python3
+import argparse
 import os
 import subprocess
-import argparse
+import sys
+from pathlib import Path
+import runpy
 
-def parse_args():
-    parser = argparse.ArgumentParser(description='Run ghidra (on project file)')
-
-    parser.add_argument('gpr_file',
-        help='path to ghidra project file (.gpr)',
-        nargs='?',
-        default=None)
-    
-    args = parser.parse_args(os.sys.argv[1:])
-    return args
-
-def main():
-    ghidra_dir = os.environ.get('GHIDRA_PATH')
-    if ghidra_dir is None or not os.path.exists(ghidra_dir):
-        print(f'[-] GHIDRA_PATH does not exist or is empty: {ghidra_dir}')
+def get_venv_path(ghidra_dir: Path) -> Path:
+    venv_dir = ghidra_dir / 'venv'
+    if not venv_dir.exists():
+        print(f"error: venv doesn't exist at {venv_dir}, set it up first")
+        print(f"  e.g. with `uv venv {venv_dir} --python ... --seed`")
         exit(1)
-    
-    args = parse_args()
+    return venv_dir
 
-    ghidra_run = os.path.join(ghidra_dir, 'ghidraRun')
-    if not os.path.exists(ghidra_run):
-        print(f'[-] ghidraRun does not exist: {ghidra_run}')
-        exit(1)
-    
-    cmd = [ghidra_run]
-    if args.gpr_file:
-        if not os.path.exists(args.gpr_file):
-            print(f'[-] ghidra project file does not exist: {args.gpr_file}')
-            exit(1)
-        
-        gpr_full_path = os.path.abspath(args.gpr_file)
-        cmd.append(gpr_full_path)
-    
+def setup_venv(ghidra_dir: Path):
+    # activating the venv like this is enough to get it propagated to the pyghidra launcher
+    activate_path = get_venv_path(ghidra_dir) / 'bin' / 'activate_this.py'
+    runpy.run_path(str(activate_path))
 
-    print(f'launching:\n  {" ".join(cmd)}')
-    subprocess.check_call(cmd)
-    print('[+] done')
+def find_ghidra_run() -> Path:
+    p = os.environ.get('GHIDRA_PATH')
+    if p and Path(p).expanduser().exists():
+        return Path(p).expanduser() / 'support/pyghidraRun'
 
+    candidates = []
+    candidates += [Path("/opt/ghidra/pyghidraRun")]
+    home = Path.home()
+    candidates += list(home.glob("ghidra*/*/pyghidraRun"))
+
+    for c in candidates:
+        if c.exists():
+            return c
+
+    raise FileNotFoundError("Could not locate 'pyghidraRun'. Set GHIDRA_PATH to the installation dir.")
+
+def _print_or_run(cmd, print_only=False):
+    if isinstance(cmd, (list, tuple)):
+        pretty = " ".join(str(x) for x in cmd)
+    else:
+        pretty = str(cmd)
+    print(pretty)
+    if not print_only:
+        subprocess.check_call(cmd)
+
+# ---------- Subcommands ----------
+def cmd_venv(args):
+    ghidra_run = find_ghidra_run()
+    print(str(get_venv_path(ghidra_run.parent.parent) / 'bin' / 'activate'))
+
+def cmd_open(args):
+    ghidra_run = find_ghidra_run()
+    setup_venv(ghidra_run.parent.parent)
+
+    gpr = args.gpr_file
+    if gpr is None:
+        # infer from cwd
+        candidates = list(Path.cwd().glob("*.gpr"))
+        if len(candidates) == 0:
+            raise SystemExit("No .gpr specified and none found in current directory.")
+        if len(candidates) > 1:
+            msg = "Multiple .gpr files found, please pick one:\n" + "\n".join(f"  - {c}" for c in candidates)
+            raise SystemExit(msg)
+        gpr = str(candidates[0])
+
+    gpr = str(Path(gpr).expanduser().resolve())
+    if not Path(gpr).exists():
+        raise SystemExit(f"Project file not found: {gpr}")
+
+    cmd = [ghidra_run, gpr]
+    print(f"launching:\n  {' '.join(cmd)}")
+    _print_or_run(cmd, print_only=args.print_only)
+    print("[+] done")
+
+def cmd_create(args):
+    project_dir = Path(args.project_directory).expanduser().resolve()
+    project_dir.mkdir(parents=True, exist_ok=True)
+
+    project_name = args.project_name or project_dir.name
+    gpr = project_dir / f"{project_name}.gpr"
+
+    ghidra_run = find_ghidra_run()
+    setup_venv(ghidra_run.parent.parent)
+
+    headless_cmd = [str(ghidra_run), '--headless', str(project_dir), project_name]
+
+    if args.overwrite:
+        headless_cmd.append("-overwrite")
+
+    if args.no_analysis:
+        headless_cmd.append("-noanalysis")
+
+    # Optional: place imported programs under a folder path inside the project
+    if args.project_folder:
+        headless_cmd += ["-folder", args.project_folder]
+
+    for f in args.files:
+        fpath = str(Path(f).expanduser().resolve())
+        if not Path(fpath).exists():
+            raise SystemExit(f"Input file not found: {fpath}")
+        headless_cmd.extend(["-import", fpath])
+
+    _print_or_run(headless_cmd, print_only=args.print_only)
+
+    # Finally, open the GUI unless suppressed
+    if not args.no_gui:
+        cmd_gui = [str(ghidra_run), str(gpr)]
+        print(f"opening project GUI:\n  {' '.join(cmd_gui)}")
+        _print_or_run(cmd_gui, print_only=args.print_only)
+
+    print("[+] done")
+
+# ---------- CLI ----------
+
+def build_parser():
+    p = argparse.ArgumentParser(
+        prog="ghidra",
+        description="Unified ghidra helper: `ghidra open` and `ghidra create`."
+    )
+    p.add_argument("--print-only", action="store_true",
+                   help="Print commands instead of executing them. Applies to all subcommands.")
+
+    sub = p.add_subparsers(dest="subcmd", required=True)
+
+    # ghidra open [gpr_file]
+    po = sub.add_parser("open", help="Open an existing Ghidra project (.gpr)")
+    po.add_argument("gpr_file", nargs="?", default=None,
+                    help="Path to a .gpr file. If omitted, uses the only .gpr in the current directory.")
+    po.set_defaults(func=cmd_open)
+
+    # ghidra create <project_directory> [files...]
+    pc = sub.add_parser("create", help="Create a new Ghidra project and import files")
+    pc.add_argument("project_directory", help="Directory where the project folder will live")
+    pc.add_argument("files", nargs="+", help="One or more input files to import into the project")
+    pc.add_argument("--project-name", help="Name of the Ghidra project (default: basename of project_directory)")
+    pc.add_argument("--project-folder", help="Destination folder path inside the new project (e.g. '/imports')")
+    pc.add_argument("--overwrite", action="store_true", help="Overwrite existing project/programs when importing")
+    pc.add_argument("--no-analysis", dest="no_analysis", action="store_true",
+                    help="Skip analysis during import (passes -noanalysis to analyzeHeadless)")
+    pc.add_argument("--no-gui", action="store_true", help="Do not launch Ghidra GUI after import")
+    pc.set_defaults(func=cmd_create)
+
+    # ghidra venv
+    pv = sub.add_parser("venv", help="Print the path for activating the venv used by ghidra, activate with `. $(ghidra venv)`")
+    pv.set_defaults(func=cmd_venv)
+
+    return p
+
+def main(argv=None):
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    # make --print-only visible to subcommands
+    if not hasattr(args, "print_only"):
+        args.print_only = False
+
+    try:
+        return args.func(args)
+    except FileNotFoundError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
+    except subprocess.CalledProcessError as e:
+        print(f"command failed with exit code {e.returncode}", file=sys.stderr)
+        return e.returncode
 
 if __name__ == "__main__":
-    main()
-
+    sys.exit(main())
