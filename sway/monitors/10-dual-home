@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # both monitors use the name/serial if connected via DP
-MON_NAME="ViewSonic Corporation VX2758-Series VVF190100000"
-MON_LEFT="DP-1"
+MON_NAME="ViewSonic Corporation VX2758-Series"
+MON_LEFT="HDMI-A-1"
 MON_RIGHT="DP-2"
 MON_COUNT=$(swaymsg -t get_outputs --pretty | grep "$MON_NAME" | wc --lines)
 if [ "$MON_COUNT" -gt "1" ]; then
