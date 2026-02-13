@@ -74,7 +74,12 @@ mode = "Vi|~Search"
 [[keyboard.bindings]]
 action = "SpawnNewInstance"
 key = "Return"
-mods = "Control|Super"
+mods = "Super"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\n"
 
 [scrolling]
 history = 100000
