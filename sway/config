@@ -39,6 +39,10 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessUp exec brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
+# speech input bindings
+bindsym --no-repeat $mod+v exec voxtype record start
+bindsym --release $mod+v exec voxtype record stop
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -82,7 +86,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+c split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+x split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
