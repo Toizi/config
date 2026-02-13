@@ -1,7 +1,37 @@
 #!/usr/bin/env zsh
+set -euo pipefail
 
-if [[ "$1" = "select_window" ]]; then
-  grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-elif [[ "$1" = "select_area" ]]; then
-  grim -g "$(slurp)" - | swappy -f -
-fi
+case "${1:-}" in
+  select_window)
+    grim -g "$(
+      swaymsg -t get_tree \
+        | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' \
+        | slurp
+    )" - | swappy -f -
+    ;;
+
+  select_area)
+    grim -g "$(slurp)" - | swappy -f -
+    ;;
+
+  active_window)
+    rect="$(
+      swaymsg -t get_tree \
+        | jq -r '.. | select(.focused? == true and .pid?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' \
+        | head -n 1
+    )"
+
+    if [[ -z "${rect:-}" || "${rect}" == "null,null nullxnull" ]]; then
+      print -u2 "Could not determine focused window rect."
+      exit 1
+    fi
+
+    grim -g "$rect" - | swappy -f -
+    ;;
+
+  *)
+    print -u2 "Usage: $0 {active_window|select_window|select_area}"
+    exit 2
+    ;;
+esac
+
