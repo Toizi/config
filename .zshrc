@@ -204,3 +204,6 @@ _fzf_comprun() {
   esac
 }
 
+
+# opencode
+export PATH=/home/mg/.opencode/bin:$PATH

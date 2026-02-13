@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+sandbox_home="$(mktemp -d /tmp/opencode-sandbox.XXXXXXXXXX)"
+trap 'rm -rf "$sandbox_home"' EXIT
+
+# Ephemeral copies — opencode can write freely but changes die with the sandbox.
+mkdir -p "$sandbox_home/.config" "$sandbox_home/.local/state"
+cp -a "$HOME/.config/opencode"      "$sandbox_home/.config/"
+cp -a "$HOME/.local/state/opencode" "$sandbox_home/.local/state/"
+
+opt_flags=()
+if [[ -d /opt ]]; then
+  opt_flags=(--ro-bind /opt /opt)
+fi
+
+bwrap \
+  --unshare-all \
+  --share-net \
+  --new-session \
+  --die-with-parent \
+  --ro-bind /usr /usr \
+  --ro-bind /lib /lib \
+  --ro-bind /lib64 /lib64 \
+  --ro-bind /bin /bin \
+  --ro-bind /sbin /sbin \
+  "${opt_flags[@]}" \
+  --ro-bind /etc/hosts /etc/hosts \
+  --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
+  --ro-bind /etc/passwd /etc/passwd \
+  --ro-bind /etc/group /etc/group \
+  --ro-bind /etc/localtime /etc/localtime \
+  --ro-bind /etc/ssl /etc/ssl \
+  --ro-bind /etc/ca-certificates /etc/ca-certificates \
+  --ro-bind /etc/ld.so.cache /etc/ld.so.cache \
+  --ro-bind /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
+  --proc /proc \
+  --dev /dev \
+  --tmpfs /tmp \
+  --bind "$PWD" "$PWD" \
+  --bind "$sandbox_home" /home/sandbox \
+  --bind "$HOME/.local/share/opencode" /home/sandbox/.local/share/opencode \
+  --chdir "$PWD" \
+  --clearenv \
+  --setenv HOME /home/sandbox \
+  --setenv XDG_CONFIG_HOME /home/sandbox/.config \
+  --setenv XDG_DATA_HOME   /home/sandbox/.local/share \
+  --setenv XDG_STATE_HOME  /home/sandbox/.local/state \
+  --setenv PATH "/opencode/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  --setenv TERM "${TERM:-xterm-256color}" \
+  --setenv LANG "${LANG:-C.UTF-8}" \
+  \
+  --ro-bind "$HOME/.opencode/bin" /opencode/bin \
+  \
+  -- \
+  opencode

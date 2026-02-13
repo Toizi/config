@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Resolve the real binary (symlink: ~/.local/bin/claude -> ~/.local/share/claude/versions/X.Y.Z)
+claude_bin="$(readlink -f "$(which claude)")"
+
+opt_flags=()
+if [[ -d /opt ]]; then
+  opt_flags=(--ro-bind /opt /opt)
+fi
+
+ca_flags=()
+if [[ -d /etc/ca-certificates ]]; then
+  ca_flags=(--ro-bind /etc/ca-certificates /etc/ca-certificates)
+fi
+
+bwrap \
+  --unshare-all \
+  --share-net \
+  --new-session \
+  --die-with-parent \
+  --ro-bind /usr /usr \
+  --ro-bind /lib /lib \
+  --ro-bind /lib64 /lib64 \
+  --ro-bind /bin /bin \
+  --ro-bind /sbin /sbin \
+  "${opt_flags[@]}" \
+  --ro-bind /etc/hosts /etc/hosts \
+  --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
+  --ro-bind /etc/passwd /etc/passwd \
+  --ro-bind /etc/group /etc/group \
+  --ro-bind /etc/localtime /etc/localtime \
+  --ro-bind /etc/ssl /etc/ssl \
+  "${ca_flags[@]}" \
+  --ro-bind /etc/ld.so.cache /etc/ld.so.cache \
+  --ro-bind /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
+  --proc /proc \
+  --dev /dev \
+  --tmpfs /tmp \
+  --bind "$PWD" "$PWD" \
+  --bind "$HOME/.claude" "$HOME/.claude" \
+  --bind "$HOME/.claude.json" "$HOME/.claude.json" \
+  --chdir "$PWD" \
+  --clearenv \
+  --setenv HOME "$HOME" \
+  --setenv XDG_DATA_HOME  "$HOME/.local/share" \
+  --setenv XDG_STATE_HOME "$HOME/.local/state" \
+  --setenv PATH "$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  --setenv TERM "${TERM:-xterm-256color}" \
+  --setenv COLORTERM "${COLORTERM:-truecolor}" \
+  --setenv LANG "${LANG:-C.UTF-8}" \
+  \
+  --ro-bind "$claude_bin" "$HOME/.local/bin/claude" \
+  --bind "$HOME/.local/share/claude" "$HOME/.local/share/claude" \
+  --bind "$HOME/.local/state/claude" "$HOME/.local/state/claude" \
+  \
+  -- \
+  claude "$@"
