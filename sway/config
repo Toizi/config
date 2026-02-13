@@ -16,6 +16,8 @@ input type:touchpad {
     natural_scroll enabled
 }
 
+# xwayland disable
+
 # Font for window titles
 font FontAwesome:monospace 12
 
@@ -97,7 +99,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Control+space floating toggle
+bindsym $mod+Alt+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -311,6 +313,8 @@ no_focus [title="^zoom\s?$"]
 # For meetings that you have joined via a link
 for_window [title="^join\?action=join.*$"] floating enable
 no_focus [title="^join\?action=join.*$"]
+
+for_window [title="Battle.net"] floating enable
 
 # enable gaps only between windows
 gaps inner 10
