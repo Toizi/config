@@ -68,7 +68,7 @@ def cmd_open(args):
     if not Path(gpr).exists():
         raise SystemExit(f"Project file not found: {gpr}")
 
-    cmd = [ghidra_run, gpr]
+    cmd = [str(ghidra_run), gpr]
     print(f"launching:\n  {' '.join(cmd)}")
     _print_or_run(cmd, print_only=args.print_only)
     print("[+] done")
