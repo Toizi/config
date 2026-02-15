@@ -14,6 +14,17 @@ if [[ -d /etc/ca-certificates ]]; then
   ca_flags=(--ro-bind /etc/ca-certificates /etc/ca-certificates)
 fi
 
+additional_flags=()
+if [[ -v ADDITIONAL_BWRAP_ARGS ]]; then
+  read -ra additional_flags <<< "$ADDITIONAL_BWRAP_ARGS"
+fi
+
+if [[ -v CLAUDE_BOXED_SHELL ]]; then
+  sandbox_cmd=(bash)
+else
+  sandbox_cmd=(tmux new-session claude --dangerously-skip-permissions "$@")
+fi
+
 bwrap \
   --unshare-all \
   --share-net \
@@ -31,15 +42,24 @@ bwrap \
   --ro-bind /etc/group /etc/group \
   --ro-bind /etc/localtime /etc/localtime \
   --ro-bind /etc/ssl /etc/ssl \
+  --ro-bind "$HOME/.tmux.conf" "$HOME/.tmux.conf" \
+  --ro-bind "$HOME/.zshenv" "$HOME/.zshenv" \
+  --ro-bind "$HOME/.gitconfig" "$HOME/.gitconfig" \
   "${ca_flags[@]}" \
+  "${additional_flags[@]}" \
   --ro-bind /etc/ld.so.cache /etc/ld.so.cache \
   --ro-bind /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
+  --dir "/run/user/$(id -u)" \
+  --ro-bind "/run/user/$(id -u)/bus" "/run/user/$(id -u)/bus" \
   --proc /proc \
   --dev /dev \
+  --dev-bind-try /dev/kmem_reader /dev/kmem_reader \
   --tmpfs /tmp \
   --bind "$PWD" "$PWD" \
   --bind "$HOME/.claude" "$HOME/.claude" \
   --bind "$HOME/.claude.json" "$HOME/.claude.json" \
+  --bind "$HOME/.cargo" "$HOME/.cargo" \
+  --bind "$HOME/.rustup" "$HOME/.rustup" \
   --chdir "$PWD" \
   --clearenv \
   --setenv HOME "$HOME" \
@@ -49,10 +69,11 @@ bwrap \
   --setenv TERM "${TERM:-xterm-256color}" \
   --setenv COLORTERM "${COLORTERM:-truecolor}" \
   --setenv LANG "${LANG:-C.UTF-8}" \
+  --setenv DBUS_SESSION_BUS_ADDRESS "unix:path=/run/user/$(id -u)/bus" \
   \
   --ro-bind "$claude_bin" "$HOME/.local/bin/claude" \
   --bind "$HOME/.local/share/claude" "$HOME/.local/share/claude" \
   --bind "$HOME/.local/state/claude" "$HOME/.local/state/claude" \
   \
   -- \
-  claude "$@"
+  "${sandbox_cmd[@]}"
