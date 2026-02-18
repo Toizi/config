@@ -74,7 +74,7 @@ mode = "Vi|~Search"
 [[keyboard.bindings]]
 action = "SpawnNewInstance"
 key = "Return"
-mods = "Super"
+mods = "Super|Control"
 
 [[keyboard.bindings]]
 key = "Return"
