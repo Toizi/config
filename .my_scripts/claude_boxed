@@ -19,14 +19,17 @@ if [[ -v ADDITIONAL_BWRAP_ARGS ]]; then
   read -ra additional_flags <<< "$ADDITIONAL_BWRAP_ARGS"
 fi
 
-if [[ -v CLAUDE_BOXED_SHELL ]]; then
-  sandbox_cmd=(bash)
+if (( $# > 0 )); then
+  sandbox_cmd=("$@")
 else
-  sandbox_cmd=(tmux new-session claude --dangerously-skip-permissions "$@")
+  sandbox_cmd=(tmux new-session claude --dangerously-skip-permissions)
 fi
 
+#  --unshare-user-try \
 bwrap \
-  --unshare-all \
+  --unshare-ipc \
+  --unshare-uts \
+  --unshare-cgroup-try \
   --share-net \
   --new-session \
   --die-with-parent \
