@@ -29,7 +29,7 @@ with open("$1", "r") as f:
 
     print("{}={}".format(name, val))
 EOM
-  python -c "${PYTHON_SCRIPT}" | while read -r line ; do
+  python3 -c "${PYTHON_SCRIPT}" | while read -r line ; do
     export "$line"
   done
 }

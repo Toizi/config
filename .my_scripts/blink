@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # makes an i3/tmux window blink when run
 # example: sleep 5; blink
 echo -e "\a"

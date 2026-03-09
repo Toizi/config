@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # check if we failed
 # https://www.freedesktop.org/software/systemd/man/systemd.exec.html
