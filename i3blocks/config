@@ -29,31 +29,32 @@ command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-
-# CPU usage
+# Volume indicator
 #
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[cpu_usage]
-label=CPU
-interval=10
-min_width=CPU100%
-DECIMALS=0
-COLOR_NORMAL="#FFFFFF"
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+
+[volume]
+#label=♪
+label=VOL
+interval=once
+signal=10
+#STEP=5%
 
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM 
-separator=true
+label=MEM
+separator=false
 interval=30
 
-# [memory]
-# label=SWAP
-# instance=swap
-# separator=false
-# interval=30
+[memory]
+label=SWAP
+instance=swap
+separator=false
+interval=30
 
 # Disk usage
 #
@@ -61,8 +62,7 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=DISK
-separator=true
+label=HOME
 #DIR=/mnt/data
 interval=30
 
@@ -71,32 +71,34 @@ interval=30
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-# IFACE=wlan0
+#IFACE=wlan0
 color=#00FF00
 interval=10
+separator=false
 
 [wifi]
 #INTERFACE=wlp3s0
 label=wifi:
 interval=10
+separator=false
 
 [bandwidth]
 #INTERFACE=eth0
-INLABEL=D:
-OUTLABEL=U:
-interval=15
+interval=5
 
-# Volume indicator
+# CPU usage
 #
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU 100.00%
+#separator=false
 
-[volume-pipewire]
-label=VOL
-interval=once
-signal=1
-USE_ALSA_NAME=1
+[load_average]
+label=LOAD
+interval=10
 
 # Battery indicator
 #
@@ -105,11 +107,6 @@ USE_ALSA_NAME=1
 label=BAT
 #label=⚡
 interval=30
-
-# Keyboard layout
-[key_layout]
-interval=once
-signal=2
 
 # Date Time
 #
@@ -160,3 +157,4 @@ interval=5
 #markup=pango
 #interval=once
 #signal=11
+
