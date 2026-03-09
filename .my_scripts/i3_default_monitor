@@ -1,1 +1,11 @@
-i3_dual_home
+#!/bin/bash
+
+for script in ~/.config/i3/monitors/*
+do
+  if "$script"; then
+    break
+  fi
+done
+
+# also try to set the background after potentially changing the monitor setup to avoid clipping
+feh --bg-scale ~/Documents/bg.jpg
