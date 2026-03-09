@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 rsync -ra ~/.config/nvim . --exclude plugin/
 rsync -ra ~/.config/lvim . --exclude plugin/ --exclude lazy-lock.json --exclude ignore
 cp -r ~/.config/sway .

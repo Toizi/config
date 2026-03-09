@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 mkdir -p ~/.config/nvim/
 rsync -ra ./nvim/ ~/.config/nvim
 mkdir -p ~/.config/lvim/
