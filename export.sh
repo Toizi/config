@@ -15,9 +15,6 @@ mkdir -p ~/.config/helix
 cp helix.toml ~/.config/helix/config.toml
 mkdir -p ~/.config/git
 cp .gitconfig ~/.config/git/config
-cp .Xmodmap ~
-cp .xinitrc ~
-cp .Xresources ~
 cp .dircolors ~
 cp .zshrc ~
 cp .zprofile ~

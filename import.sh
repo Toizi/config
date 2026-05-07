@@ -6,9 +6,6 @@ cp -r ~/.config/waybar .
 cp -r ~/.config/gammastep .
 cp -r ~/.config/swappy .
 cp ~/.config/git/config .gitconfig
-cp ~/.Xmodmap .
-cp ~/.xinitrc .
-cp ~/.Xresources .
 cp ~/.dircolors .
 cp ~/.zshrc .
 cp ~/.zprofile .
