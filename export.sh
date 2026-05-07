@@ -45,9 +45,9 @@ do
 done
 
 # setup secrets directory in case it does not exist
-if [[ -d "/data" && ! -d "/data/secrets" ]]; then
-  echo "created /data/secrets/, make sure to populate secrets as needed"
-  sudo mkdir -p /data/secrets
+if [[ -d "~/data" && ! -d "~/data/secrets" ]]; then
+  sudo mkdir -p ~/data/secrets
+  echo "created ~/data/secrets/, make sure to populate secrets as needed"
 fi
 
 mkdir -p ~/.config/alacritty/

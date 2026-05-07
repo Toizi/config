@@ -26,7 +26,6 @@ version = "1"
   "/",
   "/home",
   "/var/cache/pacman/pkg",
-  "/data",
 `}}
 {{ $ADDITIONAL_SOURCES := "" }}
 

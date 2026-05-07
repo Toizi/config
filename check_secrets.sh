@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SECRETS_DIR="/data/secrets"
+SECRETS_DIR="/home/mg/data/secrets"
 
 echo "checking secrets in ${SECRETS_DIR}"
 if [[ ! -f "${SECRETS_DIR}/gotify_url" ]] ;
