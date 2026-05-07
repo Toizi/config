@@ -15,7 +15,6 @@ cp ~/.tmux.conf .
 rsync -ra /etc/resticprofile/shared/ ./resticprofile_shared
 cp /etc/keyd/default.conf ./keyd.conf
 cp ~/.config/alacritty/alacritty.toml ./alacritty.toml
-cp ~/.config/helix/config.toml helix.toml
 cp ~/.config/systemd/user/sway-session.target .
 rsync -ra ~/.my_scripts .
 cp ~/.config/Code/User/keybindings.json ~/.config/Code/User/settings.json ./Code/User/

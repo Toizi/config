@@ -11,8 +11,6 @@ mkdir -p ~/.config/gammastep/
 rsync -ra ./gammastep/ ~/.config/gammastep
 mkdir -p ~/.config/swappy
 rsync -ra ./swappy/ ~/.config/swappy
-mkdir -p ~/.config/helix
-cp helix.toml ~/.config/helix/config.toml
 mkdir -p ~/.config/git
 cp .gitconfig ~/.config/git/config
 cp .dircolors ~
