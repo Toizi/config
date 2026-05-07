@@ -55,8 +55,6 @@ if [[ -d "/data" && ! -d "/data/secrets" ]]; then
   sudo mkdir -p /data/secrets
 fi
 
-mkdir -p ~/.config/terminator
-rsync -ra ./terminator/ ~/.config/terminator/
 mkdir -p ~/.config/alacritty/
 cp alacritty.toml ~/.config/alacritty/alacritty.toml
 mkdir -p ~/.config/Code/User/
