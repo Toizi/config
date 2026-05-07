@@ -13,7 +13,6 @@ mkdir -p ~/.config/swappy
 rsync -ra ./swappy/ ~/.config/swappy
 mkdir -p ~/.config/helix
 cp helix.toml ~/.config/helix/config.toml
-cp .radare2rc ~
 mkdir -p ~/.config/git
 cp .gitconfig ~/.config/git/config
 cp .Xmodmap ~

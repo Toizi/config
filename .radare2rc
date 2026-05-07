@@ -1,5 +1,0 @@
-e cfg.bigendian = true
-e cmd.stack = true
-e scr.utf8 = true
-eco tango
-
