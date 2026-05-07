@@ -130,7 +130,7 @@ alias vim="nvim"
 
 alias vimconfig="pushd ~/.config/nvim; $EDITOR .; popd"
 alias cat="bat"
-alias sudovim="sudo -E -s nvim"
+alias sudovim="SUDO_EDITOR=nvim sudoedit"
 alias hx="helix"
 alias rg="rg --colors 'path:fg:yellow'"
 alias sd="systemctl" # systemd
