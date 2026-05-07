@@ -242,7 +242,7 @@ bindsym $mod+Control+l mode "$mode_system"
 # mode for controlling bluetooth
 set $mode_bluetooth Bluetooth (o) on, (p) off, (c) connect
 mode "$mode_bluetooth" {
-    bindsym c exec --no-startup-id ~/.my_scripts/i3_headphone_connect, mode "default"
+    bindsym c exec --no-startup-id ~/.my_scripts/bluetoothctl_headphone_connect, mode "default"
     bindsym o exec --no-startup-id sudo systemctl start bluetooth.service, mode "default"
     bindsym p exec --no-startup-id sudo systemctl stop bluetooth.service, mode "default"
 
