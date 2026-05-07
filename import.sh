@@ -4,7 +4,6 @@ cp -r ~/.config/sway .
 cp -r ~/.config/swaylock .
 cp -r ~/.config/waybar .
 cp -r ~/.config/gammastep .
-cp -r ~/.config/redshift .
 cp -r ~/.config/swappy .
 cp ~/.radare2rc .
 cp ~/.config/git/config .gitconfig

@@ -9,8 +9,6 @@ mkdir -p ~/.config/swaylock/
 rsync -ra ./swaylock/ ~/.config/swaylock
 mkdir -p ~/.config/gammastep/
 rsync -ra ./gammastep/ ~/.config/gammastep
-mkdir -p ~/.config/redshift
-rsync -ra ./redshift/ ~/.config/redshift
 mkdir -p ~/.config/swappy
 rsync -ra ./swappy/ ~/.config/swappy
 mkdir -p ~/.config/helix
