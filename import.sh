@@ -5,8 +5,6 @@ cp -r ~/.config/sway .
 cp -r ~/.config/swaylock .
 cp -r ~/.config/waybar .
 cp -r ~/.config/gammastep .
-cp -r ~/.config/i3 .
-cp -r ~/.config/i3blocks .
 cp -r ~/.config/redshift .
 cp -r ~/.config/swappy .
 cp ~/.config/picom/picom.conf .
