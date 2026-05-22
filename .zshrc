@@ -145,7 +145,12 @@ then
 else
   alias setclip=wl-copy
   alias getclip=wl-paste
-  alias wmconfig="$EDITOR ~/.config/sway/config"
+  if [[ "$XDG_SESSION_DESKTOP" == "sway" ]]
+  then
+    alias wmconfig="$EDITOR ~/.config/sway/config"
+  else
+    alias wmconfig="$EDITOR ~/.config/hypr/hyprland.lua"
+  fi
 fi
 
 

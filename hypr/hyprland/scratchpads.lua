@@ -23,6 +23,12 @@ local scratchpads = {
 		match = "scratch-terminal",
 		command = [[alacritty --class scratch-terminal]],
 	},
+	{
+		name = "passwords",
+		key = "P",
+		match = "org.keepassxc.KeePassXC",
+		command = [[keepassxc]],
+	}
 }
 
 for _, scratchpad in ipairs(scratchpads) do
