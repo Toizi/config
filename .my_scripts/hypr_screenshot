@@ -1,0 +1,47 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+window_rects() {
+  hyprctl -j clients \
+    | jq -r --argjson workspaces "$(hyprctl -j monitors | jq '[.[] | (.activeWorkspace.id, .specialWorkspace.id) | select(. != null and . != 0)]')" '
+      .[]
+      | select(.mapped == true and .hidden == false)
+      | select(.workspace.id as $id | $workspaces | index($id))
+      | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"
+    '
+}
+
+active_window_rect() {
+  hyprctl -j activewindow \
+    | jq -er '
+      select((.at | type) == "array" and (.size | type) == "array")
+      | select((.at | length) == 2 and (.size | length) == 2)
+      | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"
+    '
+}
+
+case "${1:-}" in
+  select_window)
+    grim -g "$(window_rects | slurp)" - | swappy -f -
+    ;;
+
+  select_area)
+    grim -g "$(slurp)" - | swappy -f -
+    ;;
+
+  active_window)
+    rect="$(active_window_rect || true)"
+
+    if [[ -z "${rect:-}" ]]; then
+      print -u2 "Could not determine focused window rect."
+      exit 1
+    fi
+
+    grim -g "$rect" - | swappy -f -
+    ;;
+
+  *)
+    print -u2 "Usage: $0 {active_window|select_window|select_area}"
+    exit 2
+    ;;
+esac

@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+set -euo pipefail
+set -x
+
+# launch-or-focus-in-special SPECIAL_WORKSPACE MATCH [COMMAND...]
+
+if (($# < 2)); then
+  echo "Usage: $0 SPECIAL_WORKSPACE MATCH [COMMAND...]" >&2
+  exit 1
+fi
+
+special_workspace="$1"
+match="$2"
+shift 2
+
+match_mode="${MATCH_MODE:-class}"
+wait_attempts="${WAIT_ATTEMPTS:-100}"
+wait_sleep="${WAIT_SLEEP:-0.1}"
+
+find_window_address() {
+  hyprctl clients -j |
+    jq -r \
+      --arg match "$match" \
+      --arg mode "$match_mode" '
+        def lc: ascii_downcase;
+
+        def class_exact:
+          ((.class // "" | lc) == ($match | lc))
+          or ((.initialClass // "" | lc) == ($match | lc));
+
+        def class_contains:
+          ((.class // "" | lc) | contains($match | lc))
+          or ((.initialClass // "" | lc) | contains($match | lc));
+
+        def title_contains:
+          ((.title // "" | lc) | contains($match | lc))
+          or ((.initialTitle // "" | lc) | contains($match | lc));
+
+        [
+          .[]
+          | select(
+              if $mode == "class" then
+                class_exact
+              elif $mode == "title" then
+                title_contains
+              elif $mode == "any" then
+                class_exact or class_contains or title_contains
+              else
+                class_exact
+              end
+            )
+          | {
+              address,
+              class,
+              initialClass,
+              mapped,
+              hidden
+            }
+        ]
+        | sort_by([
+            if ((.class // "" | lc) == ($match | lc)) then 0
+            elif ((.initialClass // "" | lc) == ($match | lc)) then 1
+            else 2 end,
+            if .mapped == true then 0 else 1 end,
+            if .hidden == false then 0 else 1 end
+          ])
+        | .[0].address // empty
+      '
+}
+
+is_special_workspace_visible() {
+  hyprctl monitors -j |
+    jq -e --arg ws "special:$special_workspace" '
+      any(.[]; .specialWorkspace.name == $ws)
+    ' >/dev/null
+}
+
+focused_address() {
+  hyprctl activewindow -j | jq -r '.address // empty'
+}
+
+address="$(find_window_address)"
+
+if [[ -z "$address" ]]; then
+  if (($# == 0)); then
+    echo "No window matched '$match' and no launch command was provided." >&2
+    exit 1
+  fi
+
+  setsid "$@" >/dev/null 2>&1 &
+
+  for ((i = 0; i < wait_attempts; i++)); do
+    sleep "$wait_sleep"
+    address="$(find_window_address)"
+    [[ -n "$address" ]] && break
+  done
+fi
+
+if [[ -z "$address" ]]; then
+  echo "Could not find window matching '$match'." >&2
+  exit 1
+fi
+
+if is_special_workspace_visible && [[ "$(focused_address)" == "$address" ]]; then
+  hyprctl dispatch "hl.dsp.workspace.toggle_special(\"$special_workspace\")"
+  exit 0
+fi
+
+hyprctl dispatch "hl.dsp.window.move({ workspace = \"special:$special_workspace\", window = \"address:$address\", follow = true })"
+
+if ! is_special_workspace_visible; then
+  hyprctl dispatch "hl.dsp.workspace.toggle_special(\"$special_workspace\")"
+fi
+
+hyprctl dispatch "hl.dsp.focus({ window = \"address:$address\" })"

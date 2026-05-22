@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 mkdir -p ~/.config/nvim/
 rsync -ra ./nvim/ ~/.config/nvim
+mkdir -p ~/.config/hypr/
+rsync -ra ./hypr/ ~/.config/hypr
 mkdir -p ~/.config/sway/
 rsync -ra ./sway/ ~/.config/sway
 mkdir -p ~/.config/waybar/

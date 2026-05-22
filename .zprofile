@@ -1,6 +1,29 @@
 export PATH="/home/mg/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="/home/mg/.foundry/bin:$PATH"
 
+if command -v start-hyprland > /dev/null \
+  && [ -z "${DISPLAY}" ] \
+  && [ -z "${WAYLAND_DISPLAY}" ] \
+  && [ "${XDG_VTNR:-0}" -eq 1 ]; then
+
+  # General Wayland hints
+  export SDL_VIDEODRIVER=wayland
+  export _JAVA_AWT_WM_NONREPARENTING=1
+  export QT_QPA_PLATFORM=wayland
+  export MOZ_ENABLE_WAYLAND=1
+
+  # Hyprland session identity
+  export XDG_CURRENT_DESKTOP=Hyprland
+  export XDG_SESSION_DESKTOP=Hyprland
+  export XDG_SESSION_TYPE=wayland
+
+  # Optional: only if you actually need it
+  # export WLR_NO_HARDWARE_CURSORS=1
+  # export XWAYLAND_NO_GLAMOR=1
+
+  exec ssh-agent systemd-cat --identifier=hyprland start-hyprland
+fi
+
 if command -v sway > /dev/null && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   # fixes invisible cursor
   # export WLR_NO_HARDWARE_CURSORS=1

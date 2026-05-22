@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# monitor sometimes turns on again after issuing a single dpms = disabled
+# this script handles turning off/on again in a better way
+
+usage() {
+  echo "Usage: $0 <enable|disable>" >&2
+}
+
+action="${1:-}"
+
+case "$action" in
+  enable|disable)
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac
+
+log=/tmp/dpms-off.log
+duration=25
+lockfile=/tmp/dpms-off-loop.lock
+
+exec {lock_fd}>"$lockfile"
+
+cleanup() {
+  flock -u "$lock_fd" 2>/dev/null || true
+  eval "exec ${lock_fd}>&-"
+}
+
+trap cleanup EXIT
+
+flock --timeout "$((duration + 3))" "$lock_fd" || exit 0
+
+end_time=$((SECONDS + duration))
+
+if [[ "$action" == "disable" ]]; then
+  while (( SECONDS < end_time )); do
+    pgrep -x hyprlock >/dev/null || exit 0
+
+    hyprctl dispatch "hl.dsp.dpms({ action = \"$action\" })" >> "$log" 2>&1
+    sleep 3
+  done
+else
+  retries=3
+
+  for ((i = 0; i < retries; i++)); do
+    hyprctl dispatch "hl.dsp.dpms({ action = \"$action\" })" >> "$log" 2>&1
+    sleep 2
+  done
+fi

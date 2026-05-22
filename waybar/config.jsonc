@@ -5,9 +5,9 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
+    "modules-left": ["sway/workspaces", "hyprland/workspaces", "sway/mode", "hyprland/submap", "sway/scratchpad"],
     // "modules-center": ["sway/window"],
-    "modules-right": ["custom/voxtype", "network#bandwidth-down", "network#bandwidth-up", "network#name", "custom/wireguard", "cpu", "memory", "disk", "temperature", "backlight", "sway/language", "pulseaudio", "battery", "battery#bat2", "clock", "idle_inhibitor", "tray"],
+    "modules-right": ["custom/voxtype", "network#bandwidth-down", "network#bandwidth-up", "network#name", "custom/wireguard", "cpu", "memory", "disk", "temperature", "backlight", "sway/language", "hyprland/language", "pulseaudio", "battery", "battery#bat2", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -28,8 +28,22 @@
             "default": ""
         }
     },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "workspace-taskbar": {
+            "enable": true,
+            "update-active-window": true,
+            "format": "{icon} {title:.22}",
+            "icon-size": 16,
+            // currently broken until waybar releases update for hyprland lua dispatch
+            "on-click-window": "hyprctl dispatch focuswindow address:{address}"
+        }
+    },
     "sway/language": {
       "format": " {short}"
+    },
+    "hyprland/language": {
+      "format": " {short} {variant}"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"

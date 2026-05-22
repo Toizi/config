@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 rsync -ra ~/.config/nvim . --exclude plugin/
+cp -r ~/.config/hypr .
 cp -r ~/.config/sway .
 cp -r ~/.config/swaylock .
 cp -r ~/.config/waybar .
